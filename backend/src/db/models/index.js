@@ -27,6 +27,11 @@ fs
   });
 
 Object.keys(db).forEach(modelName => {
+  if (db[modelName].updatedAt) {
+    db[modelName].addHook('afterUpdate', (record) => {
+      record.updatedAt = new Date()
+    })
+  }
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
