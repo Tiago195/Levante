@@ -15,7 +15,8 @@ const userCreateSchema = joi.object({
 const bookCreateSchema = joi.object({
   title: joi.string().required(),
   author: joi.string().required(),
-  categorias: joi.array().items(joi.number().required()).required()
+  categorias: joi.array().items(joi.number().required()).required(),
+  content: joi.string()
 });
 
 module.exports = {

@@ -4,7 +4,7 @@ module.exports = {
     await queryInterface.bulkInsert("Categories", [
       {
         id: 1,
-        name: "Ficção Científica"
+        name: "Escolha do editor"
       },
       {
         id: 2,
@@ -24,8 +24,9 @@ module.exports = {
       },
       {
         id: 6,
-        name: "Escolha do editor"
+        name: "Ficção Científica"
       },
+
     ]);
   },
 
