@@ -12,6 +12,11 @@ module.exports = {
 
     const reservations = await Reservation.findAll({
       where,
+      include: [
+        { as: "book", model: Book, attributes: ["title", "author", "capa"] },
+        { as: "user", model: User, attributes: ["name", "email"] },
+      ],
+      attributes: { exclude: ["bookId", "userId"] },
       offset: page * 10,
       limit: 10,
       order: [[order, by]]
@@ -27,6 +32,10 @@ module.exports = {
 
     const reservations = await Reservation.findAll({
       where,
+      include: {
+        as: "book", model: Book, attributes: ["title", "author", "capa"]
+      },
+      attributes: { exclude: ["bookId", "userId"] },
       offset: page * 10,
       limit: 10,
       order: [[order, by]]
@@ -58,13 +67,13 @@ module.exports = {
 
     bookExist.set({ status: false });
 
-    const reservation = await Reservation.findOne({ where: { bookId: id, returnDate: null } });
+    const [reservation] = await bookExist.getReservations({ where: { returnDate: null }, limit: 1 });
 
     if (!reservation) throw { message: "Reserva não encontrada", statusCode: StatusCodes.NOT_FOUND };
 
     reservation.set({ returnDate: new Date() });
 
-    bookExist.save();
     reservation.save();
+    bookExist.save();
   }
 };
