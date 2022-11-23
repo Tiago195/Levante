@@ -12,7 +12,14 @@ const userCreateSchema = joi.object({
   isAdmin: joi.boolean()
 });
 
+const bookCreateSchema = joi.object({
+  title: joi.string().required(),
+  author: joi.string().required(),
+  categorias: joi.array().items(joi.number().required()).required()
+});
+
 module.exports = {
   userLoginSchema,
-  userCreateSchema
+  userCreateSchema,
+  bookCreateSchema
 };
