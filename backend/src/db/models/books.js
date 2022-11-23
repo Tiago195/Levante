@@ -13,6 +13,7 @@ module.exports = (Sequelize, DataTypes) => {
     title: DataTypes.STRING,
     author: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
+    capa: DataTypes.STRING,
     content: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,

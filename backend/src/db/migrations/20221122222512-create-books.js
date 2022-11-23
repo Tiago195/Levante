@@ -25,6 +25,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: 0
       },
+      capa: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       content: {
         type: Sequelize.STRING
       },
