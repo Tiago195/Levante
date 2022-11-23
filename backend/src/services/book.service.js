@@ -55,5 +55,11 @@ module.exports = {
 
     return updatedBook;
   },
-  destroy: async () => { }
+  destroy: async (id) => {
+    const bookExist = await Book.findByPk(id);
+
+    if (!bookExist) throw { message: "Livro não encontrado", statusCode: StatusCodes.NOT_FOUND };
+
+    await Book.destroy({ where: { id } });
+  }
 };

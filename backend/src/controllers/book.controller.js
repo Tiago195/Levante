@@ -19,5 +19,11 @@ module.exports = {
 
     res.status(StatusCodes.OK).json(book);
   },
-  destroy: async () => { }
+  destroy: async (req, res) => {
+    const { id } = req.params;
+
+    await service.destroy(id);
+
+    res.status(StatusCodes.NO_CONTENT).end();
+  },
 };
