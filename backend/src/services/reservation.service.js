@@ -15,6 +15,7 @@ module.exports = {
     bookExist.set({ status: true });
     const newReservation = await Reservation.create(reservation);
 
+    bookExist.increment("lido", { by: 1 });
     bookExist.save();
     return newReservation;
   },
