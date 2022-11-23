@@ -20,5 +20,12 @@ module.exports = (Sequelize, DataTypes) => {
     updatedAt: DataTypes.DATE,
   });
 
+  Book.associate = ({ Reservation }) => {
+    Book.hasMany(Reservation, {
+      as: "reservations",
+      foreignKey: "bookId",
+    });
+  };
+
   return Book;
 };
