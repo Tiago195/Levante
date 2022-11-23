@@ -20,17 +20,25 @@ module.exports = (Sequelize, DataTypes) => {
   });
 
   Reservation.associate = ({ Book, User }) => {
-    User.belongsToMany(Book, {
-      as: "books",
-      through: Reservation,
-      foreignKey: "userId",
-      otherKey: "bookId"
+    // User.belongsToMany(Book, {
+    //   as: "books",
+    //   through: Reservation,
+    //   foreignKey: "userId",
+    //   otherKey: "bookId"
+    // });
+    // Book.belongsToMany(User, {
+    //   as: "users",
+    //   through: Reservation,
+    //   foreignKey: "bookId",
+    //   otherKey: "userId"
+    // });
+    Reservation.belongsTo(Book, {
+      as: "book",
+      foreignKey: "bookId"
     });
-    Book.belongsToMany(User, {
-      as: "users",
-      through: Reservation,
-      foreignKey: "bookId",
-      otherKey: "userId"
+    Reservation.belongsTo(User, {
+      as: "user",
+      foreignKey: "userId"
     });
   };
 
