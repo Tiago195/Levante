@@ -16,11 +16,20 @@ const bookCreateSchema = joi.object({
   title: joi.string().required(),
   author: joi.string().required(),
   categorias: joi.array().items(joi.number().required()).required(),
+  capa: joi.string().required(),
+  content: joi.string()
+});
+
+const bookUpdatedSchema = joi.object({
+  titulo: joi.string(),
+  author: joi.string(),
+  categorias: joi.array().items(joi.number().required()),
   content: joi.string()
 });
 
 module.exports = {
   userLoginSchema,
   userCreateSchema,
-  bookCreateSchema
+  bookCreateSchema,
+  bookUpdatedSchema
 };

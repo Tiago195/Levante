@@ -1,6 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const { Op } = require("sequelize");
-const { Book, Category, Reservation } = require("../db/models");
+const { Book, Category } = require("../db/models");
 
 module.exports = {
   getAll: async ({ title = "", author = "", page = 0, order = "id", by = "ASC", category = "" }) => {
@@ -38,6 +38,22 @@ module.exports = {
 
     return newBook;
   },
-  update: async () => { },
+  update: async (id, book) => {
+    await Book.update({
+      title: book.titulo,
+      author: book.author,
+      content: book.content
+    }, {
+      where: { id }
+    });
+
+    const updatedBook = await Book.findByPk(id);
+
+    if (!updatedBook.content && book.categorias.includes(1)) throw { message: "Para escolher a categoria 'Escolha do editor', é necessario adicionar um content", statusCode: StatusCodes.BAD_REQUEST };
+
+    await updatedBook.addCategories(book.categorias);
+
+    return updatedBook;
+  },
   destroy: async () => { }
 };

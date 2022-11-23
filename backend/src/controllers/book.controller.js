@@ -12,6 +12,12 @@ module.exports = {
 
     res.status(StatusCodes.CREATED).json(book);
   },
-  update: async () => { },
+  update: async (req, res) => {
+    const { id } = req.params;
+
+    const book = await service.update(id, req.body);
+
+    res.status(StatusCodes.OK).json(book);
+  },
   destroy: async () => { }
 };
