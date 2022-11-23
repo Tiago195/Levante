@@ -4,6 +4,7 @@ const userRouter = require("./routes/user.routes");
 const errorHandlerMiddleware = require("./middlewares/errorHandler.middleware");
 const bookRouter = require("./routes/book.routes");
 const categoryRouter = require("./routes/category.routes");
+const resevationRouter = require("./routes/reservation.routes");
 
 require("express-async-errors");
 
@@ -21,6 +22,8 @@ app.use("/user", userRouter);
 app.use("/book", bookRouter);
 
 app.use("/category", categoryRouter);
+
+app.use("/reservation", resevationRouter);
 
 app.use(errorHandlerMiddleware);
 

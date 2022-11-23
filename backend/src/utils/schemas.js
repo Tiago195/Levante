@@ -27,9 +27,16 @@ const bookUpdatedSchema = joi.object({
   content: joi.string()
 });
 
+const reservationCreateSchema = joi.object({
+  userId: joi.number().required(),
+  bookId: joi.number().required(),
+  returnPreview: joi.date().required(),
+});
+
 module.exports = {
   userLoginSchema,
   userCreateSchema,
   bookCreateSchema,
-  bookUpdatedSchema
+  bookUpdatedSchema,
+  reservationCreateSchema
 };
