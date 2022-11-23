@@ -18,4 +18,19 @@ module.exports = {
     bookExist.save();
     return newReservation;
   },
+  finalize: async (id) => {
+    const bookExist = await Book.findByPk(id);
+    if (!bookExist) throw { message: "Livro não encontrado", statusCode: StatusCodes.NOT_FOUND };
+
+    bookExist.set({ status: false });
+
+    const reservation = await Reservation.findOne({ where: { bookId: id, returnDate: null } });
+
+    if (!reservation) throw { message: "Reserva não encontrada", statusCode: StatusCodes.NOT_FOUND };
+
+    reservation.set({ returnDate: new Date() });
+
+    bookExist.save();
+    reservation.save();
+  }
 };

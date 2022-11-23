@@ -9,7 +9,9 @@ module.exports = {
   },
   finalize: async (req, res) => {
     const { id } = req.params;
+
     await service.finalize(id);
+
     res.status(StatusCodes.NO_CONTENT).end();
   }
 };

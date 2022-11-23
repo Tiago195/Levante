@@ -7,4 +7,7 @@ const { reservationCreateSchema } = require("../utils/schemas");
 
 resevationRouter.post("/", validTokenMiddleware, validBodyMiddleware(reservationCreateSchema), controller.create);
 
+resevationRouter.patch("/:id", validTokenMiddleware, controller.finalize);
+
+
 module.exports = resevationRouter;
