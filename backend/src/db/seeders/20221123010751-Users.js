@@ -27,7 +27,7 @@ module.exports = {
         email: "userTwo@email.com",
         // password: "test123"
         password: "$2b$05$05NnhBjDAWlKP0SA32PTh.m32fSj1pINfuoLUrGA5YAueKGpUgMcq",
-        isAdmin: true,
+        isAdmin: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
