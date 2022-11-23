@@ -1,8 +1,41 @@
 const { StatusCodes } = require("http-status-codes");
+const { Op } = require("sequelize");
 const { Reservation, User, Book } = require("../db/models");
 
 module.exports = {
+  getAll: async ({ page = 0, order = "id", by = "ASC", bookId, userId, returnDate = "", createdAt }) => {
+    const where = {};
+    if (bookId) where.bookId = bookId;
+    if (userId) where.userId = userId;
+    if (returnDate != "") where.returnDate = { [returnDate === "true" ? Op.not : Op.is]: null };
+    if (createdAt) where.createdAt = { [Op.startsWith]: createdAt };
+
+    const reservations = await Reservation.findAll({
+      where,
+      offset: page * 10,
+      limit: 10,
+      order: [[order, by]]
+    });
+
+    return reservations;
+  },
+  getByUserId: async (userId, { page = 0, order = "id", by = "ASC", bookId, returnDate = "", createdAt }) => {
+    const where = { userId };
+    if (bookId) where.bookId = bookId;
+    if (returnDate != "") where.returnDate = { [returnDate === "true" ? Op.not : Op.is]: null };
+    if (createdAt) where.createdAt = { [Op.startsWith]: createdAt };
+
+    const reservations = await Reservation.findAll({
+      where,
+      offset: page * 10,
+      limit: 10,
+      order: [[order, by]]
+    });
+
+    return reservations;
+  },
   create: async (reservation) => {
+
     const userExist = await User.findByPk(reservation.userId);
     if (!userExist) throw { message: "Usuario não encontrado", statusCode: StatusCodes.NOT_FOUND };
     if (userExist.isAdmin) throw { message: "Admins não podem fazer resevas", statusCode: StatusCodes.UNAUTHORIZED };
