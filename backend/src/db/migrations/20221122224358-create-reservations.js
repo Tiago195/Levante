@@ -6,9 +6,14 @@ module.exports = {
  */
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Reservations", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
       userId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         references: {
           model: "Users",
           key: "id"
@@ -18,7 +23,6 @@ module.exports = {
       },
       bookId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         references: {
           model: "Books",
           key: "id"

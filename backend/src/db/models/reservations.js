@@ -5,6 +5,11 @@
  */
 module.exports = (Sequelize, DataTypes) => {
   const Reservation = Sequelize.define("Reservation", {
+    id: {
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
     userId: DataTypes.INTEGER,
     bookId: DataTypes.INTEGER,
     returnPreview: DataTypes.DATE,
