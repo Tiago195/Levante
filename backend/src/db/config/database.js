@@ -9,4 +9,4 @@ module.exports = {
     "port": process.env.DB_PORT ?? "3306",
     "dialect": "mysql"
   }
-}
+};

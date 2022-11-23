@@ -4,7 +4,7 @@
  * @param {import('sequelize').DataTypes} DataTypes 
  */
 module.exports = (Sequelize, DataTypes) => {
-  const Reservation = Sequelize.define('Reservation', {
+  const Reservation = Sequelize.define("Reservation", {
     userId: DataTypes.INTEGER,
     bookId: DataTypes.INTEGER,
     returnPreview: DataTypes.DATE,
@@ -12,22 +12,22 @@ module.exports = (Sequelize, DataTypes) => {
     createdAt: DataTypes.DATE
   }, {
     timestamps: false
-  })
+  });
 
   Reservation.associate = ({ Book, User }) => {
     User.belongsToMany(Book, {
       as: "books",
       through: Reservation,
-      foreignKey: 'userId',
-      otherKey: 'bookId'
-    })
+      foreignKey: "userId",
+      otherKey: "bookId"
+    });
     Book.belongsToMany(User, {
       as: "users",
       through: Reservation,
-      foreignKey: 'bookId',
-      otherKey: 'userId'
-    })
-  }
+      foreignKey: "bookId",
+      otherKey: "userId"
+    });
+  };
 
   return Reservation;
-}
+};

@@ -4,7 +4,7 @@
  * @param {import('sequelize').DataTypes} DataTypes 
  */
 module.exports = (Sequelize, DataTypes) => {
-  const Book = Sequelize.define('Book', {
+  const Book = Sequelize.define("Book", {
     id: {
       autoIncrement: true,
       primaryKey: true,
@@ -16,7 +16,7 @@ module.exports = (Sequelize, DataTypes) => {
     content: DataTypes.STRING,
     createAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
-  })
+  });
 
   return Book;
-}
+};

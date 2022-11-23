@@ -5,26 +5,26 @@ module.exports = {
  * @param {import('sequelize')} Sequelize 
  */
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Reservations', {
+    await queryInterface.createTable("Reservations", {
       userId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
-          model: 'Users',
-          key: 'id'
+          model: "Users",
+          key: "id"
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       bookId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
-          model: 'Books',
-          key: 'id'
+          model: "Books",
+          key: "id"
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       },
       returnPreview: {
         allowNull: false,
@@ -41,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Reservations');
+    await queryInterface.dropTable("Reservations");
   }
 };
