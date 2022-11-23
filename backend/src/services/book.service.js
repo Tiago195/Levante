@@ -19,7 +19,7 @@ module.exports = {
         [order, by]
       ],
       include: [
-        { as: "categories", model: Category, attributes: ["name"], where: { name: category }, through: { attributes: [] } }
+        { as: "categories", model: Category, attributes: ["name"], where: { name: { [Op.substring]: category } }, through: { attributes: [] } }
       ]
     });
 
