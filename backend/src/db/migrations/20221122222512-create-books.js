@@ -21,6 +21,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      lido: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       status: {
         type: Sequelize.BOOLEAN,
         defaultValue: 0

@@ -1,10 +1,30 @@
 const { StatusCodes } = require("http-status-codes");
-const { Book } = require("../db/models");
-
-
+const { Op } = require("sequelize");
+const { Book, Category, Reservation } = require("../db/models");
 
 module.exports = {
-  getAll: async () => { },
+  getAll: async ({ title = "", author = "", page = 0, order = "id", by = "ASC", category = "" }) => {
+    const books = await Book.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${title}%`
+        },
+        author: {
+          [Op.like]: `%${author}%`
+        }
+      },
+      offset: page * 10,
+      limit: 10,
+      order: [
+        [order, by]
+      ],
+      include: [
+        { as: "categories", model: Category, attributes: ["name"], where: { name: category }, through: { attributes: [] } }
+      ]
+    });
+
+    return books;
+  },
   create: async (book) => {
     const bookExist = await Book.findOne({ where: { title: book.title } });
 
