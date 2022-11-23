@@ -2,12 +2,19 @@ const resevationRouter = require("express").Router();
 
 const controller = require("../controllers/reservation.controller");
 const validBodyMiddleware = require("../middlewares/validBody.middleware");
-const validTokenMiddleware = require("../middlewares/validToken.middleware");
+const validCreationReservationMiddleware = require("../middlewares/validCreationReservation.middleware");
+const TokemMiddleware = require("../middlewares/validToken.middleware");
 const { reservationCreateSchema } = require("../utils/schemas");
 
-resevationRouter.post("/", validTokenMiddleware, validBodyMiddleware(reservationCreateSchema), controller.create);
+resevationRouter.get("/", TokemMiddleware.user, controller.getAll);
 
-resevationRouter.patch("/:id", validTokenMiddleware, controller.finalize);
+resevationRouter.post("/",
+  TokemMiddleware.user,
+  validCreationReservationMiddleware,
+  validBodyMiddleware(reservationCreateSchema),
+  controller.create
+);
 
+resevationRouter.patch("/:id", TokemMiddleware.admin, controller.finalize);
 
 module.exports = resevationRouter;

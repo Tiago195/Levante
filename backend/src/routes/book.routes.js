@@ -2,15 +2,15 @@ const bookRouter = require("express").Router();
 
 const controller = require("../controllers/book.controller");
 const validBodyMiddleware = require("../middlewares/validBody.middleware");
-const validTokenMiddleware = require("../middlewares/validToken.middleware");
+const TokemMiddleware = require("../middlewares/validToken.middleware");
 const { bookCreateSchema, bookUpdatedSchema } = require("../utils/schemas");
 
 bookRouter.get("/", controller.getAll);
 
-bookRouter.post("/", validTokenMiddleware, validBodyMiddleware(bookCreateSchema), controller.create);
+bookRouter.post("/", TokemMiddleware.admin, validBodyMiddleware(bookCreateSchema), controller.create);
 
-bookRouter.put("/:id", validTokenMiddleware, validBodyMiddleware(bookUpdatedSchema), controller.update);
+bookRouter.put("/:id", TokemMiddleware.admin, validBodyMiddleware(bookUpdatedSchema), controller.update);
 
-bookRouter.delete("/:id", validTokenMiddleware, controller.destroy);
+bookRouter.delete("/:id", TokemMiddleware.admin, controller.destroy);
 
 module.exports = bookRouter;
