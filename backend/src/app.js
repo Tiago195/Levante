@@ -3,6 +3,7 @@ const cors = require("cors");
 const userRouter = require("./routes/user.routes");
 const errorHandlerMiddleware = require("./middlewares/errorHandler.middleware");
 const bookRouter = require("./routes/book.routes");
+const categoryRouter = require("./routes/category.routes");
 
 require("express-async-errors");
 
@@ -18,6 +19,8 @@ app.get("/", (req, res) => {
 app.use("/user", userRouter);
 
 app.use("/book", bookRouter);
+
+app.use("/category", categoryRouter);
 
 app.use(errorHandlerMiddleware);
 

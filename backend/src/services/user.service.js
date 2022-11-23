@@ -25,6 +25,4 @@ module.exports = {
 
     return newUser;
   },
-
-  update: async (user) => { }
 };
