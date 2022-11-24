@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Flex, Input, InputGroup, InputRightAddon, Select, Text } from "@chakra-ui/react";
+import { Avatar, AvatarBadge, Box, Button, Flex, Input, InputGroup, InputRightAddon, Select, Text } from "@chakra-ui/react";
 import React, { FormEventHandler, useContext, useRef, useState } from "react";
 import { GiConsoleController } from "react-icons/gi";
 import { ImBooks } from "react-icons/im";
@@ -8,7 +8,7 @@ import { booksApi } from "../utils/api";
 import { ModalLogin } from "./ModalLogin";
 
 export const Header = () => {
-  const { query, setBooks, user } = useContext(Context);
+  const { query, setBooks, user, pendencies } = useContext(Context);
   const method = useRef<HTMLSelectElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const { pathname } = useLocation();
@@ -52,9 +52,11 @@ export const Header = () => {
       
       <Box>
         {user?.email ? (
-          <Button bg="none" overflow="hidden">
+          <Button bg="none" _hover={{bg: "none"}} _focus={{bg: "none"}}>
             <Flex alignItems="center" gap="10px">
-              <Avatar name={user.name} h="40px"/>
+              <Avatar name={user.name}>
+                <AvatarBadge boxSize='1.25em' bg='blue.500' >{pendencies?.length}</AvatarBadge>
+              </Avatar>
               <Text>{user.email}</Text>
             </Flex>
           </Button>

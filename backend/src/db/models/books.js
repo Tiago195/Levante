@@ -21,8 +21,8 @@ module.exports = (Sequelize, DataTypes) => {
   });
 
   Book.associate = ({ Reservation }) => {
-    Book.hasMany(Reservation, {
-      as: "reservations",
+    Book.hasOne(Reservation, {
+      as: "reservation",
       foreignKey: "bookId",
     });
   };

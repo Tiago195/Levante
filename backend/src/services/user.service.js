@@ -6,9 +6,9 @@ const { Op, Model } = require("sequelize");
 
 module.exports = {
   login: async (user) => {
-    const loged = await User.findOne({
-      where: { email: user.email }
-    });
+    const loged = await User.findOne({ where: { email: user.email } });
+
+    if (!loged) throw { message: "Email ou senha Inválido", statusCode: StatusCodes.BAD_REQUEST };
 
     const isValidPassword = by.compareSync(user.password, loged.password);
 

@@ -1,6 +1,7 @@
 import axios, {CreateAxiosDefaults} from "axios";
 import { ICreatedBook, IUpdatedBook } from "../interfaces/IBook";
 import { IQueryGetAllBooks } from "../interfaces/IQueryGetAllBooks";
+import { IQueryGetAllReservation } from "../interfaces/IQueryGetAllReservation";
 import { ICreatedReservation } from "../interfaces/IReservation";
 import { ICreatedUser, ILogin, IUser } from "../interfaces/IUser";
 
@@ -39,7 +40,14 @@ export const categoryApi = {
 };
 
 export const reservationApi = {
-  create: async (reservation: ICreatedReservation) => api.post("/reservation", reservation)
+  create: async (reservation: ICreatedReservation) => api.post("/reservation", reservation),
+  getAll: async (queryObj: IQueryGetAllReservation) => {
+    const entrys = Object.entries(queryObj);
+    const query = entrys.filter(e => e[1]).map((e) => `${e[0]}=${e[1]}`).join("&");
+    return api.get(`/reservation?${query}`);
+  },
+  getAllPendencies: async () => api.get("/reservation/pendencies"),
+  patch: async (bookId: number, status: string) => api.patch(`/reservation/${bookId}`, {status})
 };
 
 export { api };

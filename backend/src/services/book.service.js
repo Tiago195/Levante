@@ -4,7 +4,10 @@ const { Book, Category, Reservation } = require("../db/models");
 
 module.exports = {
   getAll: async ({ title = "", author = "", page = 0, order = "id", by = "ASC", category = "", status = "" }) => {
-    const isAvailable = status != "" ? { status: status === "false" } : {};
+
+    const isAvailable = status ? {
+      status: false
+    } : "";
 
     const books = await Book.findAll({
       where: {
@@ -14,7 +17,7 @@ module.exports = {
         author: {
           [Op.like]: `%${author}%`
         },
-        ...isAvailable
+        ...isAvailable,
       },
       offset: page * 10,
       limit: 10,
@@ -23,7 +26,7 @@ module.exports = {
       ],
       include: [
         { as: "categories", model: Category, where: { name: { [Op.substring]: category } }, through: { attributes: [] } },
-        { as: "reservations", model: Reservation }
+        { as: "reservation", model: Reservation }
       ]
     });
 

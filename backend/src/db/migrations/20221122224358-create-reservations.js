@@ -37,7 +37,7 @@ module.exports = {
       returnDate: {
         type: Sequelize.DATE
       },
-      // Pending | Finished | Reading
+      // Pending | Finished | Reading | Denied
       status: {
         type: Sequelize.STRING,
         defaultValue: "Pending"

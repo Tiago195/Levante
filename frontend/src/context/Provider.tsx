@@ -3,13 +3,17 @@ import Context from ".";
 import { IBook } from "../interfaces/IBook";
 import { ICategory } from "../interfaces/ICategory";
 import { IQueryGetAllBooks } from "../interfaces/IQueryGetAllBooks";
+import { IQueryGetAllReservation } from "../interfaces/IQueryGetAllReservation";
+import { IReservation } from "../interfaces/IReservation";
 import { IUser } from "../interfaces/IUser";
-import { booksApi, categoryApi } from "../utils/api";
+import { booksApi, categoryApi, reservationApi } from "../utils/api";
 
 export const Provider = ({ children }: any) => {
   const [books, setBooks] = useState<IBook[]>([]);
   const [user, setUser] = useState<IUser>(JSON.parse(localStorage.getItem("user") as string) ?? {} as IUser);
   const [categories, setCategories] = useState<ICategory[]>([]);
+  const [reservations, setReservations] = useState<IReservation[]>([]);
+  const [pendencies, setPendencies] = useState<IReservation[]>([]);
   const query = useRef<IQueryGetAllBooks>({
     title: "",
     author: "",
@@ -20,19 +24,24 @@ export const Provider = ({ children }: any) => {
     status: ""
   });
 
-  // useEffect(() => {
-  //   if(books.length === 0) {
-  //     query.current.page = 0;
-  //   }
-  // }, [books]);
+  const queryReservation = useRef<IQueryGetAllReservation>({
+    bookId: 0,
+    userId: 0,
+    by: "",
+    order: "",
+    page: 0,
+    status: ""
+  });
 
   useEffect(() => {
     booksApi.getAll(query.current).then(({data}) => setBooks(data));
     categoryApi.getAll().then(({data}) => setCategories(data));
+    // reservationApi.getAll({ status: "Pending" } as IQueryGetAllReservation).then(({data}) => setReservations(data));
+    reservationApi.getAllPendencies().then(({data}) => setPendencies(data));
   },[]);
 
   return (
-    <Context.Provider value={{ books, setBooks, categories, query, user, setUser }}>
+    <Context.Provider value={{ books, setBooks, categories, query, user, setUser, reservations, setReservations, pendencies }}>
       {children}
     </Context.Provider>
   );

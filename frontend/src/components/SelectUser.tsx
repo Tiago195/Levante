@@ -16,6 +16,11 @@ export const SelectUser = ({users, setUsers}: Props) => {
     await userApi.getAll(search).then(({data}) => setUsers(data)); 
   };
 
+  const colors = {
+    Pending: "yellow.500",
+    Finished: "red.500",
+    Reading: "green.500"
+  };
   return (
     <>
       <InputSearch list="users" api={searchUsers} searchBy="Email">
@@ -39,7 +44,7 @@ export const SelectUser = ({users, setUsers}: Props) => {
             <Heading as='h3' size='md'>Reservas</Heading>
             {users[0].reservations?.map(e => (
               <ListItem p="0 10px" key={e.id}>
-                <ListIcon as={BsCalendarFill} color="blue.500"/>
+                <ListIcon as={BsCalendarFill} color={colors[e.status]} />
                 {new Date(e.returnPreview).toLocaleDateString("pt-BR", {weekday: "long", year: "numeric", month: "long", day: "numeric"})}
               </ListItem>
             ))}

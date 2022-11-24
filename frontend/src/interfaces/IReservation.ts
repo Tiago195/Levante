@@ -1,7 +1,8 @@
 export interface IReservation {
   id: number,
-  userId: number,
-  bookId:number,
+  user: { name: string, email: string },
+  book: { title: string, author: string, capa: string, id: number },
+  status: "Pending" | "Finished" | "Reading",
   returnPreview: Date,
   returnDate?: Date,
   createdAt: Date

@@ -16,7 +16,6 @@ export const Reservar = () => {
   const createReservation = async () => {
     
     if(previewDate.current) {
-      console.log(previewDate.current.value);
       const reservation = {
         bookId: book[0]?.id,
         userId: users[0]?.id,

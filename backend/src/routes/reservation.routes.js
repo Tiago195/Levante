@@ -8,6 +8,8 @@ const { reservationCreateSchema } = require("../utils/schemas");
 
 resevationRouter.get("/", TokemMiddleware.user, controller.getAll);
 
+resevationRouter.get("/pendencies", TokemMiddleware.admin, controller.getAllPendencies);
+
 resevationRouter.post("/",
   TokemMiddleware.user,
   validCreationReservationMiddleware,
@@ -15,6 +17,6 @@ resevationRouter.post("/",
   controller.create
 );
 
-resevationRouter.patch("/:id", TokemMiddleware.admin, controller.finalize);
+resevationRouter.patch("/:id", TokemMiddleware.admin, controller.patch);
 
 module.exports = resevationRouter;
