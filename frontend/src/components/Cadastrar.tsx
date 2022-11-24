@@ -11,7 +11,7 @@ export const Cadastrar = () => {
         <FormNewBook />
       </FormControl>
 
-      <Stack direction='row' h='100vh' >
+      <Stack direction='row' h='80vh' >
         <Divider orientation='vertical' />
       </Stack>
 

@@ -11,7 +11,7 @@ type Props = {
 
 export const CardBook = ({book}: Props) => {
   const {user} = useContext(Context);
-
+  
   return (
     <Card
       direction={{ base: "column", sm: "row" }}
@@ -23,7 +23,7 @@ export const CardBook = ({book}: Props) => {
         backgroundSize="cover"
         backgroundPosition="center"
         w="200px"
-        filter={book.status ? "grayscale(0)" : "grayscale(1)"}
+        filter={book.status ? "grayscale(1)" : "grayscale(0)"}
       >
 
       </Box>
@@ -40,11 +40,10 @@ export const CardBook = ({book}: Props) => {
           </HStack>
         </CardBody>
         <CardFooter justifyContent="flex-end">
-          {/* troca isso aqui depois */}
           {user?.email ? (
             <ActionBookBtn isAdmin={user.isAdmin} book={book} />
           ) : (
-            <ModalLogin disabled={!book.status} variant='solid' colorScheme='blue' textBtn="Reservar"/>
+            <ModalLogin disabled={book.status} variant='solid' colorScheme='blue' textBtn="Reservar"/>
           )}
         </CardFooter>
       </Stack>

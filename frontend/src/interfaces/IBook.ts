@@ -1,4 +1,5 @@
 import { ICategory } from "./ICategory";
+import { IReservation } from "./IReservation";
 
 export interface IBook {
   id: number,
@@ -10,6 +11,7 @@ export interface IBook {
   content?: string,
   createdAt: Date,
   updatedAt: Date,
+  reservations: IReservation[]
   categories: ICategory[]
 }
 

@@ -1,6 +1,7 @@
 import axios, {CreateAxiosDefaults} from "axios";
 import { ICreatedBook, IUpdatedBook } from "../interfaces/IBook";
 import { IQueryGetAllBooks } from "../interfaces/IQueryGetAllBooks";
+import { ICreatedReservation } from "../interfaces/IReservation";
 import { ICreatedUser, ILogin, IUser } from "../interfaces/IUser";
 
 const options: CreateAxiosDefaults = {
@@ -18,7 +19,8 @@ export const userApi = {
     localStorage.setItem("user", JSON.stringify(data));
     return data;
   },
-  create: async (user: ICreatedUser) => api.post("/user", user)
+  create: async (user: ICreatedUser) => api.post("/user", user),
+  getAll: async (email: string) => api.get(`/user?email=${email}`)
 };
 
 export const booksApi = {
@@ -34,6 +36,10 @@ export const booksApi = {
 
 export const categoryApi = {
   getAll:async () => api.get("/category")
+};
+
+export const reservationApi = {
+  create: async (reservation: ICreatedReservation) => api.post("/reservation", reservation)
 };
 
 export { api };

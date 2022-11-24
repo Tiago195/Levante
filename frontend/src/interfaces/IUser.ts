@@ -1,3 +1,5 @@
+import { IReservation } from "./IReservation";
+
 export interface ILogin {
   email: string,
   password: string
@@ -11,6 +13,7 @@ export interface IUser {
   createdAt: Date,
   updatedAt: Date,
   token?: string,
+  reservations?: IReservation[]
 }
 
 export interface ICreatedUser {
