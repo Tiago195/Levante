@@ -5,6 +5,8 @@ const validBodyMiddleware = require("../middlewares/validBody.middleware");
 const TokemMiddleware = require("../middlewares/validToken.middleware");
 const { userLoginSchema, userCreateSchema } = require("../utils/schemas");
 
+
+userRouter.get("/", TokemMiddleware.admin, controller.getAll);
 userRouter.post("/login", validBodyMiddleware(userLoginSchema), controller.login);
 userRouter.post("/", TokemMiddleware.admin, validBodyMiddleware(userCreateSchema), controller.create);
 

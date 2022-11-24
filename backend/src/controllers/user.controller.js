@@ -13,7 +13,10 @@ module.exports = {
 
     res.status(StatusCodes.CREATED).json(user);
   },
-  update: async (req, res) => {
-    const user = await service.update(req.body);
+  getAll: async (req, res) => {
+    const { email } = req.query;
+    const users = await service.getAll(email);
+
+    res.status(StatusCodes.OK).json(users);
   }
 };

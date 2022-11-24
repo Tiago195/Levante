@@ -1,6 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const { Op } = require("sequelize");
-const { Book, Category } = require("../db/models");
+const { Book, Category, Reservation } = require("../db/models");
 
 module.exports = {
   getAll: async ({ title = "", author = "", page = 0, order = "id", by = "ASC", category = "", status = "" }) => {
@@ -22,7 +22,8 @@ module.exports = {
         [order, by]
       ],
       include: [
-        { as: "categories", model: Category, where: { name: { [Op.substring]: category } }, through: { attributes: [] } }
+        { as: "categories", model: Category, where: { name: { [Op.substring]: category } }, through: { attributes: [] } },
+        { as: "reservations", model: Reservation }
       ]
     });
 

@@ -1,7 +1,8 @@
-const { User } = require("../db/models");
+const { User, Reservation } = require("../db/models");
 const by = require("bcrypt");
 const { StatusCodes } = require("http-status-codes");
 const token = require("../utils/token");
+const { Op, Model } = require("sequelize");
 
 module.exports = {
   login: async (user) => {
@@ -25,4 +26,8 @@ module.exports = {
 
     return newUser;
   },
+
+  getAll: async (email = "") => {
+    return User.findAll({ where: { email: { [Op.substring]: email } }, include: { as: "reservations", model: Reservation } });
+  }
 };
