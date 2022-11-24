@@ -12,3 +12,9 @@ export interface IUser {
   updatedAt: Date,
   token?: string,
 }
+
+export interface ICreatedUser {
+  email: string,
+  password: string,
+  name: string
+}

@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { Home } from "./pages/Home";
 import { Provider } from "./context/Provider";
+import { Profile } from "./pages/Profile";
 // import { Logo } from "./Logo"
 
 export const App = () => (
@@ -17,6 +18,7 @@ export const App = () => (
         {/* <ColorModeSwitcher /> */}
         <Routes>
           <Route path="/" element={<Home />}/>
+          <Route path="/profile" element={<Profile />}/>
         </Routes>
       </BrowserRouter>
     </Provider>

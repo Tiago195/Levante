@@ -1,7 +1,7 @@
 import axios, {CreateAxiosDefaults} from "axios";
-import { IUpdatedBook } from "../interfaces/IBook";
+import { ICreatedBook, IUpdatedBook } from "../interfaces/IBook";
 import { IQueryGetAllBooks } from "../interfaces/IQueryGetAllBooks";
-import { ILogin, IUser } from "../interfaces/IUser";
+import { ICreatedUser, ILogin, IUser } from "../interfaces/IUser";
 
 const options: CreateAxiosDefaults = {
   baseURL: process.env.REACT_API_URL ?? "http://localhost:3001",
@@ -17,7 +17,8 @@ export const userApi = {
     const {data} = await api.post("/user/login", user);
     localStorage.setItem("user", JSON.stringify(data));
     return data;
-  }
+  },
+  create: async (user: ICreatedUser) => api.post("/user", user)
 };
 
 export const booksApi = {
@@ -28,6 +29,7 @@ export const booksApi = {
   },
   update: async (book: IUpdatedBook, id: number) => api.put(`/book/${id}`, book),
   delete: async (id: number) => api.delete(`/book/${id}`),
+  create:async (book: ICreatedBook) => api.post("/book", book)
 };
 
 export const categoryApi = {

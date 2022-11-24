@@ -19,3 +19,10 @@ export interface IUpdatedBook {
   categories: number[],
   content: string
 }
+
+export interface ICreatedBook {
+  title: string,
+  author: string,
+  categories: number[],
+  capa: string
+}

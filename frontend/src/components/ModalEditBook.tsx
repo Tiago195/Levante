@@ -6,13 +6,14 @@ import Context from "../context";
 import { ICategory } from "../interfaces/ICategory";
 import { booksApi } from "../utils/api";
 import { Loading } from "./Loading";
+import { InputCategories } from "./InputCategories";
 
 type Props = {
   book: IBook
 }
 
 export const ModalEditBook = ({book}: Props) => {
-  const { categories: AllCategories, query, setBooks } = useContext(Context);
+  const { query, setBooks } = useContext(Context);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState(false);
@@ -22,11 +23,6 @@ export const ModalEditBook = ({book}: Props) => {
   const authorInput = useRef<HTMLInputElement>(null);
   const contentInput = useRef<HTMLInputElement>(null);
   const [categories, setCategories] = useState(book.categories);
-  // const anotherTags = AllCategories?.filter(category => categories.some(e => e.id !== category.id));
-  
-  const changeCategories = (e: string[]) => {
-    setCategories(e.map((category) => JSON.parse(category)));
-  };
 
   const send = async () => {
     if(titleInput.current && authorInput.current && contentInput.current) {
@@ -70,19 +66,7 @@ export const ModalEditBook = ({book}: Props) => {
               <FormLabel>Content</FormLabel>
               <Input ref={contentInput} defaultValue={book.content} />
 
-              <FormLabel>Adicionar categoria</FormLabel>
-
-              <CheckboxGroup colorScheme='green' defaultValue={categories.map(e => JSON.stringify(e))} onChange={changeCategories}>
-                <Stack display="flex" flexDirection="row" wrap="wrap" justifyContent="space-between">
-                  {AllCategories?.map(category => (
-                    <Tag key={category.id}>
-                      <Checkbox value={JSON.stringify({id: category.id, name: category.name })}>
-                        <TagLabel>{category.name}</TagLabel>
-                      </Checkbox>
-                    </Tag>
-                  ))}
-                </Stack>
-              </CheckboxGroup>
+              <InputCategories categories={categories} setCategories={setCategories}/>
 
             </FormControl>
           </ModalBody>

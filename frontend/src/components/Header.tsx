@@ -2,6 +2,7 @@ import { Avatar, Box, Button, Flex, Input, InputGroup, InputRightAddon, Select, 
 import React, { FormEventHandler, useContext, useRef, useState } from "react";
 import { GiConsoleController } from "react-icons/gi";
 import { ImBooks } from "react-icons/im";
+import { useLocation, useNavigate } from "react-router-dom";
 import Context from "../context";
 import { booksApi } from "../utils/api";
 import { ModalLogin } from "./ModalLogin";
@@ -10,6 +11,8 @@ export const Header = () => {
   const { query, setBooks, user } = useContext(Context);
   const method = useRef<HTMLSelectElement>(null);
   const input = useRef<HTMLInputElement>(null);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const send = async (e: any) => {
     e.preventDefault();
@@ -25,25 +28,27 @@ export const Header = () => {
   return (
     <Flex padding={[3, 8]} justifyContent="space-between" gap="20px">
       <Flex gap="10px" fontFamily={"monospace"} alignItems="center" fontSize="30px">
-        <Button bg="none" p={0} fontSize="30px" _hover={{bg: "none"}} _focus={{bg: "none"}}>
+        <Button bg="none" p={0} fontSize="30px" _hover={{bg: "none"}} _focus={{bg: "none"}} onClick={() => navigate("/")}>
           <ImBooks />
         </Button>
         <Text as="h1">Levante</Text>
       </Flex>
       
-      <Box flex={1}>
-        <form onSubmit={send}>
-          <InputGroup>
-            <Input placeholder="Pesquisar Livros" ref={input} />
-            <InputRightAddon bg="none">
-              <Select ref={method} defaultValue="title">
-                <option value="title">Title</option>
-                <option value="author">Author</option>
-              </Select>
-            </InputRightAddon>
-          </InputGroup>
-        </form>
-      </Box>
+      {!pathname.includes("profile") && (
+        <Box flex={1}>
+          <form onSubmit={send}>
+            <InputGroup>
+              <Input placeholder="Pesquisar Livros" ref={input} />
+              <InputRightAddon bg="none">
+                <Select ref={method} defaultValue="title">
+                  <option value="title">Title</option>
+                  <option value="author">Author</option>
+                </Select>
+              </InputRightAddon>
+            </InputGroup>
+          </form>
+        </Box>
+      )}
       
       <Box>
         {user?.email ? (
