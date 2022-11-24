@@ -16,8 +16,6 @@ module.exports = {
       group: ["Category.id"],
     });
 
-    console.log(await categories[1].countBooks());
-
     return categories;
   }
 };

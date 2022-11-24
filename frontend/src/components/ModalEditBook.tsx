@@ -53,7 +53,7 @@ export const ModalEditBook = ({book}: Props) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Fazer login</ModalHeader>
+          <ModalHeader>Editar livro</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl >
