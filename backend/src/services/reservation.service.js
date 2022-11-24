@@ -43,7 +43,7 @@ module.exports = {
 
     return reservations;
   },
-  create: async (reservation) => {
+  create: async (reservation, isAdmin) => {
 
     const userExist = await User.findByPk(reservation.userId);
     if (!userExist) throw { message: "Usuario não encontrado", statusCode: StatusCodes.NOT_FOUND };
@@ -55,7 +55,7 @@ module.exports = {
 
 
     bookExist.set({ status: true });
-    const newReservation = await Reservation.create(reservation);
+    const newReservation = await Reservation.create({ ...reservation, status: isAdmin ? "Reading" : "Pending" });
 
     bookExist.increment("lido", { by: 1 });
     bookExist.save();

@@ -14,6 +14,7 @@ module.exports = (Sequelize, DataTypes) => {
     bookId: DataTypes.INTEGER,
     returnPreview: DataTypes.DATE,
     returnDate: DataTypes.DATE,
+    status: DataTypes.STRING,
     createdAt: DataTypes.DATE
   }, {
     timestamps: false

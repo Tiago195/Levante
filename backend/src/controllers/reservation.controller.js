@@ -10,7 +10,8 @@ module.exports = {
     res.status(StatusCodes.OK).json(reservations);
   },
   create: async (req, res) => {
-    const reservation = await service.create(req.body);
+    const { user } = req;
+    const reservation = await service.create(req.body, user.isAdmin);
 
     res.status(StatusCodes.CREATED).json(reservation);
   },
