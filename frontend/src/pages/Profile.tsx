@@ -30,6 +30,10 @@ export const Profile = () => {
           <TabPanel>
             <Pendentes />
           </TabPanel>
+
+          <TabPanel>
+            das
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </>

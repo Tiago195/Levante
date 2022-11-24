@@ -11,7 +11,7 @@ export interface IBook {
   content?: string,
   createdAt: Date,
   updatedAt: Date,
-  reservations: IReservation[]
+  reservation: IReservation
   categories: ICategory[]
 }
 

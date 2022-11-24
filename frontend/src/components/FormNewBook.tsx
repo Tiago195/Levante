@@ -30,6 +30,10 @@ export const FormNewBook = () => {
           duration: 5000,
           isClosable: true,
         });
+        titleInput.current.value = "";
+        authorInput.current.value = "";
+        capaInput.current.value = "";
+        setCategories([]);
       } catch (error: any) {
         const message = error.response.data.message;
         toast({
@@ -41,7 +45,7 @@ export const FormNewBook = () => {
         });
       }
     }
-
+    
   };
 
   return (

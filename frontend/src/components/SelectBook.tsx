@@ -47,7 +47,7 @@ export const SelectBook = ({book, setBooks, input}: Props) => {
             book[0].status && (
               <Flex gap="20px">
                 <Alert status='info' variant='top-accent'>
-                  <AlertIcon />{`Previsão de retorno: ${new Date(book[0].reservations[0].returnPreview).toLocaleDateString()}`}
+                  <AlertIcon />{`Previsão de retorno: ${new Date(book[0].reservation.returnPreview).toLocaleDateString()}`}
                 </Alert>
               </Flex>
             )

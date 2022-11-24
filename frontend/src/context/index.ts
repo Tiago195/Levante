@@ -13,7 +13,9 @@ export interface IProvider {
   reservations?: IReservation[]
   setReservations: Dispatch<SetStateAction<IReservation[]>>
   categories?: ICategory[]
+  setCategories: Dispatch<SetStateAction<ICategory[]>>
   pendencies?: IReservation[]
+  setPendencies: Dispatch<SetStateAction<IReservation[]>>
   query?: MutableRefObject<IQueryGetAllBooks>
 }
 
@@ -23,7 +25,9 @@ const Context = createContext<IProvider>({
   categories: [],
   setBooks: () => {console.log("s");},
   setUser: () => {console.log("s");},
-  setReservations: () => {console.log("s");}
+  setReservations: () => {console.log("s");},
+  setCategories: () => {console.log("s");},
+  setPendencies: () => {console.log("s");},
 });
 
 export default Context;

@@ -2,7 +2,7 @@ import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, Al
 import React, { RefObject, useContext, useRef, useState } from "react";
 import Context from "../context";
 import { IBook } from "../interfaces/IBook";
-import { booksApi } from "../utils/api";
+import { booksApi, categoryApi } from "../utils/api";
 import { Loading } from "./Loading";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const ModalDeleteBook = ({ book}: Props) => {
-  const { query, setBooks } = useContext(Context);
+  const { query, setBooks, setCategories } = useContext(Context);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef() as RefObject<any>;
   const [loading, setLoading] = useState(false);
@@ -20,12 +20,9 @@ export const ModalDeleteBook = ({ book}: Props) => {
       setLoading(true);
       await booksApi.delete(book.id);
     } finally {
-      booksApi.getAll(query!.current)
-        .then(({data}) => setBooks(data))
-        .finally(() => {
-          setLoading(false);
-          onClose();
-        });
+      const [books, category] = await Promise.all([booksApi.getAll(query!.current),  categoryApi.getAll()]);
+      setBooks(books.data);
+      setCategories(category.data);
     }
   };
 

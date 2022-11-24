@@ -10,7 +10,6 @@ export const FormNewUser = () => {
   const toast = useToast();
 
 
-
   const createUser = async () => {
     if(nameInput.current && emailInput.current && passwordInput.current && isAdminInput.current) {
       const createUser = {
@@ -27,6 +26,12 @@ export const FormNewUser = () => {
           duration: 5000,
           isClosable: true,
         });
+        console.log(isAdminInput.current.checked);
+        
+        nameInput.current.value = "";
+        emailInput.current.value = "";
+        passwordInput.current.value = "";
+        
       } catch (error: any) {
         const message = error.response.data.message;
         toast({

@@ -41,7 +41,20 @@ export const Provider = ({ children }: any) => {
   },[]);
 
   return (
-    <Context.Provider value={{ books, setBooks, categories, query, user, setUser, reservations, setReservations, pendencies }}>
+    <Context.Provider
+      value={{
+        books,
+        setBooks,
+        categories,
+        setCategories,
+        query,
+        user,
+        setUser,
+        reservations,
+        setReservations,
+        pendencies,
+        setPendencies
+      }}>
       {children}
     </Context.Provider>
   );

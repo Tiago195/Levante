@@ -4,7 +4,7 @@ import Context from "../context";
 import { reservationApi } from "../utils/api";
 
 export const Pendentes = () => {
-  const { pendencies } = useContext(Context);
+  const { pendencies, setPendencies } = useContext(Context);
   const toast = useToast();
 
   const sendPermition = async (bookId: number,  status: string) => {
@@ -29,8 +29,8 @@ export const Pendentes = () => {
       });
     }
     // remover esta pendencia
+    setPendencies((old) => old.filter(e => e.id !== bookId));
   };
-  console.log(pendencies);
   
   return (
     <Box>

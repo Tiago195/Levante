@@ -29,6 +29,9 @@ export const Reservar = () => {
           duration: 5000,
           isClosable: true,
         });
+        setBooks([]);
+        setUsers([]);
+        previewDate.current.value = "";
       } catch (error: any) {
         const message = error.response.data.message;
         toast({
