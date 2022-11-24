@@ -3,7 +3,9 @@ const { Op } = require("sequelize");
 const { Book, Category } = require("../db/models");
 
 module.exports = {
-  getAll: async ({ title = "", author = "", page = 0, order = "id", by = "ASC", category = "" }) => {
+  getAll: async ({ title = "", author = "", page = 0, order = "id", by = "ASC", category = "", status = "" }) => {
+    const isAvailable = status != "" ? { status: status === "true" } : {};
+
     const books = await Book.findAll({
       where: {
         title: {
@@ -11,7 +13,8 @@ module.exports = {
         },
         author: {
           [Op.like]: `%${author}%`
-        }
+        },
+        ...isAvailable
       },
       offset: page * 10,
       limit: 10,
@@ -19,7 +22,7 @@ module.exports = {
         [order, by]
       ],
       include: [
-        { as: "categories", model: Category, attributes: ["name"], where: { name: { [Op.substring]: category } }, through: { attributes: [] } }
+        { as: "categories", model: Category, where: { name: { [Op.substring]: category } }, through: { attributes: [] } }
       ]
     });
 
@@ -39,19 +42,15 @@ module.exports = {
     return newBook;
   },
   update: async (id, book) => {
-    await Book.update({
-      title: book.titulo,
-      author: book.author,
-      content: book.content
-    }, {
+    await Book.update(book, {
       where: { id }
     });
 
     const updatedBook = await Book.findByPk(id);
 
-    if (!updatedBook.content && book.categorias.includes(1)) throw { message: "Para escolher a categoria 'Escolha do editor', é necessario adicionar um content", statusCode: StatusCodes.BAD_REQUEST };
+    if (!updatedBook.content && book.categories.includes(1)) throw { message: "Para escolher a categoria 'Escolha do editor', é necessario adicionar um content", statusCode: StatusCodes.BAD_REQUEST };
 
-    await updatedBook.addCategories(book.categorias);
+    await updatedBook.setCategories(book.categories);
 
     return updatedBook;
   },
