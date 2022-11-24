@@ -21,10 +21,10 @@ const bookCreateSchema = joi.object({
 });
 
 const bookUpdatedSchema = joi.object({
-  titulo: joi.string(),
-  author: joi.string(),
-  categorias: joi.array().items(joi.number().required()),
-  content: joi.string()
+  title: joi.string().empty(),
+  author: joi.string().empty(),
+  categories: joi.array().items(joi.number().required()),
+  content: joi.string().allow("")
 });
 
 const reservationCreateSchema = joi.object({
