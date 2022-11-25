@@ -1,4 +1,7 @@
-const joi = require("joi");
+const joiBase = require("joi");
+const joiDate = require("@joi/date");
+
+const joi = joiBase.extend(joiDate);
 
 const userLoginSchema = joi.object({
   email: joi.string().email().required(),
@@ -30,7 +33,7 @@ const bookUpdatedSchema = joi.object({
 const reservationCreateSchema = joi.object({
   userId: joi.number().required(),
   bookId: joi.number().required(),
-  returnPreview: joi.date().required(),
+  returnPreview: joi.date().format("YYYY-MM-DD").raw().required(),
 });
 
 module.exports = {

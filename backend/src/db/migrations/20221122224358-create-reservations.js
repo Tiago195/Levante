@@ -32,7 +32,7 @@ module.exports = {
       },
       returnPreview: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
       },
       returnDate: {
         type: Sequelize.DATE
