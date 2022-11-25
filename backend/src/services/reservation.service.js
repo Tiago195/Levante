@@ -3,12 +3,9 @@ const { Op } = require("sequelize");
 const { Reservation, User, Book } = require("../db/models");
 
 module.exports = {
-  getAll: async ({ page = 0, order = "id", by = "ASC", title = "", email = "", status = "", createdAt }) => {
+  getAll: async (isAdmin, userId, { page = 0, order = "id", by = "ASC", title = "", email = "", status = "", createdAt }) => {
     const where = {};
-    // if (bookId) where.bookId = bookId;
-    // if (userId) where.userId = userId;
-    // if (returnDate != "") where.returnDate = { [returnDate === "true" ? Op.not : Op.is]: null };
-    // console.log(createdAt);
+    if (!isAdmin) where.userId = userId;
     if (status) where.status = status;
     if (createdAt) where.createdAt = { [Op.startsWith]: createdAt };
 
@@ -26,25 +23,7 @@ module.exports = {
 
     return reservations;
   },
-  getByUserId: async (userId, { page = 0, order = "id", by = "ASC", bookId, returnDate = "", createdAt }) => {
-    const where = { userId };
-    if (bookId) where.bookId = bookId;
-    if (returnDate != "") where.returnDate = { [returnDate === "true" ? Op.not : Op.is]: null };
-    if (createdAt) where.createdAt = { [Op.startsWith]: createdAt };
 
-    const reservations = await Reservation.findAll({
-      where,
-      include: {
-        as: "book", model: Book, attributes: ["title", "author", "capa"]
-      },
-      attributes: { exclude: ["bookId", "userId"] },
-      offset: page * 10,
-      limit: 10,
-      order: [[order, by]]
-    });
-
-    return reservations;
-  },
   getAllPendencies: async () => {
     const pendencies = await Reservation.findAll({
       where: {
@@ -56,6 +35,7 @@ module.exports = {
             ]
           },
           { status: "Pending" },
+          { status: "Reading" },
         ]
       },
       include: [
@@ -88,16 +68,17 @@ module.exports = {
     const bookExist = await Book.findByPk(id);
     if (!bookExist) throw { message: "Livro não encontrado", statusCode: StatusCodes.NOT_FOUND };
 
-    if (status === "Finished") bookExist.set({ status: false });
-
     const reservation = await bookExist.getReservation({ where: { status: status === "Finished" ? "Reading" : "Pending" } });
 
     if (!reservation) throw { message: "Reserva não encontrada", statusCode: StatusCodes.NOT_FOUND };
 
-    reservation.set({ returnDate: new Date(), status });
+    if (status === "Finished" || status === "Denied") {
+      bookExist.set({ status: false });
+      reservation.set({ returnDate: new Date() });
+    }
+    reservation.set({ status });
 
     reservation.save();
-
     bookExist.save();
   }
 };

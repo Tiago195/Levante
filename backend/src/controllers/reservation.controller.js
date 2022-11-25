@@ -5,7 +5,7 @@ module.exports = {
   getAll: async (req, res) => {
     const { isAdmin, id } = req.user;
 
-    const reservations = isAdmin ? await service.getAll(req.query) : await service.getByUserId(id, req.query);
+    const reservations = await service.getAll(isAdmin, id, req.query);
 
     res.status(StatusCodes.OK).json(reservations);
   },
