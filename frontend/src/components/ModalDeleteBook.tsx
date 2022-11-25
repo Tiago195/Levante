@@ -23,6 +23,7 @@ export const ModalDeleteBook = ({ book}: Props) => {
       const [books, category] = await Promise.all([booksApi.getAll(query!.current),  categoryApi.getAll()]);
       setBooks(books.data);
       setCategories(category.data);
+      onClose();
     }
   };
 

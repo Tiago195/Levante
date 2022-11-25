@@ -20,7 +20,7 @@ export const FormNewBook = () => {
         title: titleInput.current.value,
         author: authorInput.current.value,
         categories: categories.map(e => e.id),
-        capa: capaInput.current.value
+        cover: capaInput.current.value
       };
       try {
         await booksApi.create(createdBook);

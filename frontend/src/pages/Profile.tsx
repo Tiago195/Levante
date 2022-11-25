@@ -24,28 +24,32 @@ export const Profile = () => {
           )}
           <Tab>Historico de Reservas</Tab>
         </TabList>
+        {user?.isAdmin ? (
+          <TabPanels>
+            <TabPanel>
+              <Cadastrar />
+            </TabPanel>
 
-        <TabPanels>
-          {user?.isAdmin && (
-            <>
-              <TabPanel>
-                <Cadastrar />
-              </TabPanel>
+            <TabPanel>
+              <Reservar />
+            </TabPanel>
 
-              <TabPanel>
-                <Reservar />
-              </TabPanel>
+            <TabPanel>
+              <Pendentes />
+            </TabPanel>
+            
+            <TabPanel>
+              <History />
+            </TabPanel>
+          </TabPanels>
 
-              <TabPanel>
-                <Pendentes />
-              </TabPanel>
-            </>
-          )}
-
-          <TabPanel>
-            <History />
-          </TabPanel>
-        </TabPanels>
+        ) : (
+          <TabPanels>
+            <TabPanel>
+              <History />
+            </TabPanel>
+          </TabPanels>
+        )}
       </Tabs>
     </>
   );

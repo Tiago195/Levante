@@ -58,7 +58,7 @@ export const DreawerFilter = ({query, get}: Props) => {
 
               <Box>
 
-                <FormLabel>Data</FormLabel>
+                <FormLabel>Data da reserva</FormLabel>
                 <Input defaultValue={query.current.createdAt} onChange={({target}) => query.current.createdAt = target.value} type="date"/>
               </Box>
 

@@ -19,7 +19,7 @@ export const CardBook = ({book}: Props) => {
       variant='outline'
     >
       <Box 
-        backgroundImage={book.capa}
+        backgroundImage={book.cover}
         backgroundSize="cover"
         backgroundPosition="center"
         w="200px"

@@ -68,6 +68,7 @@ export const ModalReservation = ({ book }: Props) => {
             <FormControl>
               <FormLabel>Previsão de entrega</FormLabel>
               <Input ref={previewDate} type="date"/>
+              <Text fontSize="2xs" color="gray.500">Prazo minimo de entrega é 3 dias depois da data de reserva.</Text>
             </FormControl>
           </ModalBody>
 

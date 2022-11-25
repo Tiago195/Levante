@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react";
 import React, { useContext, useRef } from "react";
 import Context from "../context";
 import { userApi } from "../utils/api";
@@ -15,6 +15,8 @@ export const ModalLogin = ({textBtn, disabled = false, variant = "solid", colorS
   const {setUser } = useContext(Context);
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
+  const toast = useToast();
+
 
   const send = async () => {
     if(emailInput.current && passwordInput.current) {
@@ -22,8 +24,20 @@ export const ModalLogin = ({textBtn, disabled = false, variant = "solid", colorS
         email: emailInput.current.value,
         password: passwordInput.current.value,
       };
-      userApi.login(objLogin).then(({data}) => setUser(data));
-      window.location.reload();
+      try {
+        const {data} = await userApi.login(objLogin);
+        setUser(data);
+        window.location.reload();
+      } catch (error: any) {
+        const message = error.response.data.message;
+        toast({
+          title: "Algo deu errado.",
+          description: message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     }
   };
 

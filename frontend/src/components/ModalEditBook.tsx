@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, CheckboxGroup, FormControl, FormLabel, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Tag, TagCloseButton, TagLabel, TagRightIcon, Textarea, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Checkbox, CheckboxGroup, FormControl, FormLabel, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Tag, TagCloseButton, TagLabel, TagRightIcon, Textarea, useDisclosure, useToast } from "@chakra-ui/react";
 import React, { useContext, useRef, useState } from "react";
 import { IBook } from "../interfaces/IBook";
 import {GrAdd} from "react-icons/gr";
@@ -17,26 +17,36 @@ export const ModalEditBook = ({book}: Props) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState(false);
-
+  const toast = useToast();
 
   const titleInput = useRef<HTMLInputElement>(null);
   const authorInput = useRef<HTMLInputElement>(null);
-  const contentInput = useRef<HTMLInputElement>(null);
+  const resumeInput = useRef<HTMLInputElement>(null);
   const [categories, setCategories] = useState(book.categories);
 
   const send = async () => {
-    if(titleInput.current && authorInput.current && contentInput.current) {
+    if(titleInput.current && authorInput.current && resumeInput.current) {
       const updateBook = {
         title: titleInput.current.value,
         author: authorInput.current.value,
         categories: categories.map(e => e.id),
-        content: contentInput.current.value
+        resume: resumeInput.current.value
       };
       
       try {
         setLoading(true);
         await booksApi.update(updateBook, book.id);
-      } finally {
+      } catch (err: any) {
+        const message = err.response.data.message;
+        toast({
+          title: "Algo deu errado.",
+          description: message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } 
+      finally {
         booksApi.getAll(query!.current).then(({data}) => setBooks(data))
           .finally(() => {
             setLoading(false);
@@ -63,8 +73,8 @@ export const ModalEditBook = ({book}: Props) => {
               <FormLabel>Author</FormLabel>
               <Input ref={authorInput} defaultValue={book.author} />
 
-              <FormLabel>Content</FormLabel>
-              <Input ref={contentInput} defaultValue={book.content} />
+              <FormLabel>Resumo</FormLabel>
+              <Input ref={resumeInput} defaultValue={book.resume} />
 
               <InputCategories categories={categories} setCategories={setCategories}/>
 

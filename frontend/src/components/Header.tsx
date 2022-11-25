@@ -75,8 +75,8 @@ export const Header = () => {
               <MenuList>
                 <Flex justifyContent="space-between" p="5px">
                   <Box>
-                    <MenuItem onClick={logOut}>Sair da conta</MenuItem>
                     <MenuItem onClick={() => navigate("/profile")}>Opções</MenuItem>
+                    <MenuItem onClick={logOut}>Sair</MenuItem>
                   </Box>
                   <ColorModeSwitcher />
                 </Flex>
