@@ -10,6 +10,7 @@ import { Home } from "./pages/Home";
 import { Provider } from "./context/Provider";
 import { Profile } from "./pages/Profile";
 // import { Logo } from "./Logo"
+import "./app.css";
 
 export const App = () => (
   <ChakraProvider theme={theme}>

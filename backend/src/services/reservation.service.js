@@ -12,7 +12,7 @@ module.exports = {
     const reservations = await Reservation.findAll({
       where,
       include: [
-        { as: "book", model: Book, where: { title: { [Op.substring]: title } }, attributes: ["title", "author", "capa", "id"] },
+        { as: "book", model: Book, where: { title: { [Op.substring]: title } }, attributes: ["title", "author", "cover", "id"] },
         { as: "user", model: User, where: { email: { [Op.startsWith]: email } }, attributes: ["name", "email"] },
       ],
       attributes: { exclude: ["bookId", "userId"] },
@@ -39,7 +39,7 @@ module.exports = {
         ]
       },
       include: [
-        { as: "book", model: Book, attributes: ["title", "author", "capa", "id"] },
+        { as: "book", model: Book, attributes: ["title", "author", "cover", "id"] },
         { as: "user", model: User, attributes: ["name", "email"] },
       ],
     });
@@ -60,7 +60,7 @@ module.exports = {
     bookExist.set({ status: true });
     const newReservation = await Reservation.create({ ...reservation, status: isAdmin ? "Reading" : "Pending" });
 
-    bookExist.increment("lido", { by: 1 });
+    bookExist.increment("readCount", { by: 1 });
     bookExist.save();
     return newReservation;
   },

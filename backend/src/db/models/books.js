@@ -18,6 +18,17 @@ module.exports = (Sequelize, DataTypes) => {
     resume: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
+  }, {
+    hooks: {
+      afterFind: async (instance, options) => {
+        if (instance.length) {
+          for (let i of instance) {
+            const data = await i.getCategories();
+            i.dataValues.categories = data;
+          }
+        }
+      }
+    }
   });
 
   Book.associate = ({ Reservation }) => {

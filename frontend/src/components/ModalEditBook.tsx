@@ -21,7 +21,7 @@ export const ModalEditBook = ({book}: Props) => {
 
   const titleInput = useRef<HTMLInputElement>(null);
   const authorInput = useRef<HTMLInputElement>(null);
-  const resumeInput = useRef<HTMLInputElement>(null);
+  const resumeInput = useRef<HTMLTextAreaElement>(null);
   const [categories, setCategories] = useState(book.categories);
 
   const send = async () => {
@@ -74,7 +74,7 @@ export const ModalEditBook = ({book}: Props) => {
               <Input ref={authorInput} defaultValue={book.author} />
 
               <FormLabel>Resumo</FormLabel>
-              <Input ref={resumeInput} defaultValue={book.resume} />
+              <Textarea ref={resumeInput} defaultValue={book.resume} />
 
               <InputCategories categories={categories} setCategories={setCategories}/>
 

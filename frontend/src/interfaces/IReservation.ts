@@ -3,7 +3,7 @@ export type statusReservation = "Pending" | "Finished" | "Reading" | "Denied" | 
 export interface IReservation {
   id: number,
   user: { name: string, email: string },
-  book: { title: string, author: string, capa: string, id: number },
+  book: { title: string, author: string, cover: string, id: number },
   status: statusReservation,
   returnPreview: string,
   returnDate?: string,

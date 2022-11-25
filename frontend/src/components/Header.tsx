@@ -27,7 +27,6 @@ export const Header = () => {
   };
 
   const logOut = () => {
-    
     localStorage.removeItem("user");
     navigate("/");
     window.location.reload();
@@ -36,7 +35,7 @@ export const Header = () => {
   return (
     <Flex padding={[3, 8]} justifyContent="space-between" gap="20px">
       <Flex gap="10px" fontFamily={"monospace"} alignItems="center" fontSize="30px">
-        <Button bg="none" p={0} fontSize="30px" _hover={{bg: "none"}} _focus={{bg: "none"}} onClick={() => navigate("/")}>
+        <Button bg="none" _hover={{bg: "none"}} _focus={{bg: "none"}} p={0} fontSize="30px"  onClick={() => navigate("/")}>
           <ImBooks />
         </Button>
         <Text as="h1">Levante</Text>
