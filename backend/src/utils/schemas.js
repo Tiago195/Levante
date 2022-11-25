@@ -30,10 +30,13 @@ const bookUpdatedSchema = joi.object({
   content: joi.string().allow("")
 });
 
+const today = new Date();
+today.setDate(today.getDate() + 3);
+
 const reservationCreateSchema = joi.object({
   userId: joi.number().required(),
   bookId: joi.number().required(),
-  returnPreview: joi.date().format("YYYY-MM-DD").raw().required(),
+  returnPreview: joi.date().format("YYYY-MM-DD").min(today.toLocaleDateString()).required(),
 });
 
 module.exports = {
