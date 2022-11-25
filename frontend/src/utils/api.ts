@@ -5,9 +5,11 @@ import { IQueryGetAllReservation } from "../interfaces/IQueryGetAllReservation";
 import { ICreatedReservation } from "../interfaces/IReservation";
 import { ICreatedUser, ILogin, IUser } from "../interfaces/IUser";
 
+const user = (JSON.parse(localStorage.getItem("user") as string) as IUser);
+
 const options: CreateAxiosDefaults = {
   baseURL: process.env.REACT_API_URL ?? "http://localhost:3001",
-  headers: {Authorization: (JSON.parse(localStorage.getItem("user") as string) as IUser).token}
+  headers: {Authorization: user ? user.token : ""}
 };
 
 const api = axios.create(options);

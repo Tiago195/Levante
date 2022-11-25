@@ -23,7 +23,7 @@ export const ModalLogin = ({textBtn, disabled = false, variant = "solid", colorS
         password: passwordInput.current.value,
       };
       userApi.login(objLogin).then(({data}) => setUser(data));
-      onClose();
+      window.location.reload();
     }
   };
 

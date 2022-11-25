@@ -1,5 +1,5 @@
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, InputGroup, InputLeftElement, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
-import React, { useEffect, useRef, useState } from "react";
+import { Box, Button, Flex, FormControl, FormLabel, Heading, InputRightElement, Input, InputGroup, InputLeftElement, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, Kbd } from "@chakra-ui/react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Context from "../context";
 import { IQueryGetAllReservation } from "../interfaces/IQueryGetAllReservation";
 import { IReservation } from "../interfaces/IReservation";
@@ -56,6 +56,7 @@ export const History = () => {
         <InputGroup maxW="40%">
           <InputLeftElement pointerEvents='none' ><AiOutlineSearch /></InputLeftElement>
           <Input type='tel' onChange={({target}) => query.current.title = target.value} onKeyUp={search} placeholder='Pesquisar pelo titulo do livro' />
+          <InputRightElement marginRight="15px"><Kbd>Enter</Kbd></InputRightElement>
         </InputGroup>
 
         <DreawerFilter query={query} get={getReservations}/>
