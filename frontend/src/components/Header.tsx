@@ -1,8 +1,9 @@
-import { Avatar, AvatarBadge, Box, Button, Flex, Input, InputGroup, InputRightAddon, Select, Text } from "@chakra-ui/react";
+import { Avatar, AvatarBadge, Box, Button, Flex, Input, InputGroup, InputRightAddon, Menu, MenuButton, MenuItem, MenuList, Select, Text } from "@chakra-ui/react";
 import React, { FormEventHandler, useContext, useRef, useState } from "react";
 import { GiConsoleController } from "react-icons/gi";
 import { ImBooks } from "react-icons/im";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ColorModeSwitcher } from "../ColorModeSwitcher";
 import Context from "../context";
 import { booksApi } from "../utils/api";
 import { ModalLogin } from "./ModalLogin";
@@ -23,6 +24,13 @@ export const Header = () => {
 
       booksApi.getAll(query!.current).then(({data}) => setBooks(data));
     }
+  };
+
+  const logOut = () => {
+    
+    localStorage.removeItem("user");
+    navigate("/");
+    window.location.reload();
   };
 
   return (
@@ -50,15 +58,30 @@ export const Header = () => {
         </Box>
       )}
       
-      <Box>
+      <Box >
         {user?.email ? (
-          <Button bg="none" _hover={{bg: "none"}} _focus={{bg: "none"}}>
-            <Flex alignItems="center" gap="10px">
-              <Avatar name={user.name}>
-                <AvatarBadge boxSize='1.25em' bg='blue.500' >{pendencies?.length}</AvatarBadge>
-              </Avatar>
-              <Text>{user.email}</Text>
-            </Flex>
+          <Button bg="none" _hover={{bg: "none"}} w="fit-content" _focus={{bg: "none"}} zIndex="3">
+            <Menu >
+              <MenuButton as={Button} bg="none" _hover={{bg: "none"}} _focus={{bg: "none"}}>
+                <Flex alignItems="center" gap="10px">
+                  <Avatar name={user.name} boxSize="2em">
+                    {!!pendencies?.length && (
+                      <AvatarBadge boxSize='1.25em' bg='blue.500' >{pendencies?.length}</AvatarBadge>
+                    )}
+                  </Avatar>
+                  <Text>{user.email}</Text>
+                </Flex>
+              </MenuButton>
+              <MenuList>
+                <Flex justifyContent="space-between" p="5px">
+                  <Box>
+                    <MenuItem onClick={logOut}>Sair da conta</MenuItem>
+                    <MenuItem onClick={() => navigate("/profile")}>Opções</MenuItem>
+                  </Box>
+                  <ColorModeSwitcher />
+                </Flex>
+              </MenuList>
+            </Menu>
           </Button>
         ) : (
           <ModalLogin colorScheme='green' textBtn="Login"/>
