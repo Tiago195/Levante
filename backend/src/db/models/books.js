@@ -12,10 +12,10 @@ module.exports = (Sequelize, DataTypes) => {
     },
     title: DataTypes.STRING,
     author: DataTypes.STRING,
-    lido: DataTypes.INTEGER,
+    readCount: DataTypes.INTEGER,
     status: DataTypes.BOOLEAN,
-    capa: DataTypes.STRING,
-    content: DataTypes.STRING,
+    cover: DataTypes.STRING,
+    resume: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   });

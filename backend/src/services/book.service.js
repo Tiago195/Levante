@@ -35,7 +35,7 @@ module.exports = {
   create: async (book) => {
     const bookExist = await Book.findOne({ where: { title: book.title } });
 
-    if (!book.content && book.categories.includes(1)) throw { message: "Para escolher a categoria 'Escolha do editor', é necessario adicionar um content", statusCode: StatusCodes.BAD_REQUEST };
+    if (!book.resume && book.categories.includes(1)) throw { message: "Para escolher a categoria 'Escolha do editor', é necessario adicionar um resumo", statusCode: StatusCodes.BAD_REQUEST };
 
     if (bookExist) throw { message: "O Titulo ja existe", statusCode: StatusCodes.CONFLICT };
 
@@ -52,7 +52,7 @@ module.exports = {
 
     const updatedBook = await Book.findByPk(id);
 
-    if (!updatedBook.content && book.categories.includes(1)) throw { message: "Para escolher a categoria 'Escolha do editor', é necessario adicionar um content", statusCode: StatusCodes.BAD_REQUEST };
+    if (!updatedBook.resume && book.categories.includes(1)) throw { message: "Para escolher a categoria 'Escolha do editor', é necessario adicionar um resumo", statusCode: StatusCodes.BAD_REQUEST };
 
     await updatedBook.setCategories(book.categories);
 

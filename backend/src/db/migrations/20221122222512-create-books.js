@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      lido: {
+      readCount: {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
@@ -29,11 +29,11 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: 0
       },
-      capa: {
+      cover: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      content: {
+      resume: {
         type: Sequelize.STRING
       },
       createdAt: {
