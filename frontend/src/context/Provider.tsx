@@ -24,15 +24,6 @@ export const Provider = ({ children }: any) => {
     status: ""
   });
 
-  const queryReservation = useRef<IQueryGetAllReservation>({
-    bookId: 0,
-    userId: 0,
-    by: "",
-    order: "",
-    page: 0,
-    status: ""
-  });
-
   useEffect(() => {
     booksApi.getAll(query.current).then(({data}) => setBooks(data));
     categoryApi.getAll().then(({data}) => setCategories(data));

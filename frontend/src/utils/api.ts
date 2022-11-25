@@ -41,8 +41,8 @@ export const categoryApi = {
 
 export const reservationApi = {
   create: async (reservation: ICreatedReservation) => api.post("/reservation", reservation),
-  getAll: async (queryObj: IQueryGetAllReservation) => {
-    const entrys = Object.entries(queryObj);
+  getAll: async (queryObj?: IQueryGetAllReservation) => {
+    const entrys = Object.entries(queryObj ?? {});
     const query = entrys.filter(e => e[1]).map((e) => `${e[0]}=${e[1]}`).join("&");
     return api.get(`/reservation?${query}`);
   },

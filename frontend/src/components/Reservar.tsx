@@ -19,8 +19,9 @@ export const Reservar = () => {
       const reservation = {
         bookId: book[0]?.id,
         userId: users[0]?.id,
-        returnPreview: new Date(previewDate.current.value)
+        returnPreview: previewDate.current.value
       };
+      
       try {
         await reservationApi.create(reservation);
         toast({

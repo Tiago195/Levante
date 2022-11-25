@@ -29,14 +29,15 @@ export const Pendentes = () => {
       });
     }
     // remover esta pendencia
-    setPendencies((old) => old.filter(e => e.id !== bookId));
+    setPendencies((old) => old.filter(e => e.book.id !== bookId));
+    // console.log(bookId);
+    
   };
   
   return (
     <Box>
       <TableContainer>
         <Table variant='striped' colorScheme='blue'>
-          <TableCaption>Imperial to metric conversion factors</TableCaption>
           <Thead>
             <Tr>
               <Th>usuario</Th>

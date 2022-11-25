@@ -4,6 +4,7 @@ import { IUser } from "../interfaces/IUser";
 import { userApi } from "../utils/api";
 import { InputSearch } from "./InputSearch";
 import {BsCalendarFill} from "react-icons/bs";
+import { statusReservation } from "../interfaces/IReservation";
 
 type Props = {
   users: IUser[],
@@ -19,7 +20,9 @@ export const SelectUser = ({users, setUsers}: Props) => {
   const colors = {
     Pending: "yellow.500",
     Finished: "red.500",
-    Reading: "green.500"
+    Reading: "green.500",
+    Denied: "req.1000",
+    "": ""
   };
   return (
     <>

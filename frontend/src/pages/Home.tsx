@@ -8,17 +8,18 @@ import { CarouselBook } from "../components/CarouselBook";
 import { Filtros } from "../components/Filtros";
 import Context from "../context";
 import { booksApi } from "../utils/api";
+import { Pagination } from "../components/Pagination";
 
 export const Home = () => {
   const { books, query, setBooks } = useContext(Context);
   
-  const incrementPage = () => {
+  const incrementPage = async () => {
     query!.current.page += 1;
 
     booksApi.getAll(query!.current).then(({data}) => setBooks(data));
   };
 
-  const decrementPage = () => {
+  const decrementPage = async () => {
     query!.current.page -= 1;
     
     booksApi.getAll(query!.current).then(({data}) => setBooks(data));
@@ -43,11 +44,7 @@ export const Home = () => {
             </Flex>
           </Flex>
         </Flex>
-        <Flex justifyContent="center" p={[3, 8]} gap="20px">
-          <Button disabled={query!.current.page === 0} onClick={decrementPage}>Anterior</Button>
-          <Button>{query!.current.page + 1}</Button>
-          <Button disabled={books!.length !== 10} onClick={incrementPage}>Proxima</Button>
-        </Flex>
+        <Pagination page={query!.current.page} decrementPage={decrementPage} incrementPage={incrementPage} limit={books!.length}/>
       </Box>
     </>
   );

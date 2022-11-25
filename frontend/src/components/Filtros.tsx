@@ -2,9 +2,15 @@ import { Button, Flex, FormControl, FormLabel, Select, Switch } from "@chakra-ui
 import React, { ChangeEvent, useContext } from "react";
 import Context from "../context";
 import { booksApi } from "../utils/api";
+import { OrderBy } from "./OrderBy";
 
 export const Filtros = () => {
   const { query, setBooks } = useContext(Context);
+  const options = [
+    {key: "Titulo", value: "title"},
+    {value: "author", key: "Author"},
+    {value: "lido", key: "Mais lidos"}
+  ];
 
   const changeOrder = ({ target }: ChangeEvent<HTMLSelectElement>) => {
     query!.current.order = target.value;
@@ -34,20 +40,13 @@ export const Filtros = () => {
       </FormControl>
 
       <Flex gap="20px">
-        <Flex w="fit-content">
-          <Select placeholder='Ordenar Por' onChange={changeOrder}>
-            <option value="title">Titulo</option>
-            <option value="author">Author</option>
-            <option value="lido">Mais lidos</option>
-          </Select>
-        </Flex>
-
-        <Flex w="fit-content">
-          <Select placeholder='Ordem' onChange={changeBy}>
-            <option value="ASC">Crescente</option>
-            <option value="DESC">Decrescente</option>
-          </Select>
-        </Flex>
+        <OrderBy
+          changeBy={changeBy}
+          changeOrder={changeOrder}
+          options={options}
+          order={query!.current.order}
+          by={query!.current.by}
+        />
 
         <Button onClick={changeBooks}>Filtrar</Button>
       </Flex>
