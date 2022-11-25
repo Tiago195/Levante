@@ -3,19 +3,20 @@ const { Op } = require("sequelize");
 const { Reservation, User, Book } = require("../db/models");
 
 module.exports = {
-  getAll: async ({ page = 0, order = "id", by = "ASC", bookId, userId, status = "", createdAt }) => {
+  getAll: async ({ page = 0, order = "id", by = "ASC", title = "", email = "", status = "", createdAt }) => {
     const where = {};
-    if (bookId) where.bookId = bookId;
-    if (userId) where.userId = userId;
+    // if (bookId) where.bookId = bookId;
+    // if (userId) where.userId = userId;
     // if (returnDate != "") where.returnDate = { [returnDate === "true" ? Op.not : Op.is]: null };
+    // console.log(createdAt);
     if (status) where.status = status;
     if (createdAt) where.createdAt = { [Op.startsWith]: createdAt };
 
     const reservations = await Reservation.findAll({
       where,
       include: [
-        { as: "book", model: Book, attributes: ["title", "author", "capa", "id"] },
-        { as: "user", model: User, attributes: ["name", "email"] },
+        { as: "book", model: Book, where: { title: { [Op.substring]: title } }, attributes: ["title", "author", "capa", "id"] },
+        { as: "user", model: User, where: { email: { [Op.startsWith]: email } }, attributes: ["name", "email"] },
       ],
       attributes: { exclude: ["bookId", "userId"] },
       offset: page * 10,
