@@ -3,6 +3,7 @@ import React from "react";
 import { IBook } from "../interfaces/IBook";
 import { ModalDeleteBook } from "./ModalDeleteBook";
 import { ModalEditBook } from "./ModalEditBook";
+import { ModalReservation } from "./ModalReservation";
 
 type Props = {
   isAdmin: boolean,
@@ -17,6 +18,6 @@ export default function ActionBookBtn({isAdmin, book}: Props) {
       <ModalEditBook book={book} />
     </Flex>
   ) : (
-    <Button disabled={!book.status} variant='solid' colorScheme='blue'>Reservar</Button>
+    <ModalReservation book={book}  />
   );
 }
