@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, useToast } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import Context from "../context";
+import { IReservation } from "../interfaces/IReservation";
 import { reservationApi } from "../utils/api";
 
 export const Pendentes = () => {
@@ -8,12 +9,11 @@ export const Pendentes = () => {
   const toast = useToast();
 
   const sendPermition = async (bookId: number,  status: string) => {
-
-    // enviar para o backend a permissao
+    
     try {
       await reservationApi.patch(bookId, status);
       toast({
-        title: "Pendencia removida.",
+        title: "Pendencia Resolvida.",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -28,9 +28,10 @@ export const Pendentes = () => {
         isClosable: true,
       });
     }
-    // remover esta pendencia
-    setPendencies((old) => old.filter(e => e.book.id !== bookId));
-    // console.log(bookId);
+
+    const newPendencies = status === "Reading" ? pendencies?.map(e => ({...e, status: "Reading"})) : pendencies!.filter(e => e.book.id !== bookId);
+
+    setPendencies(newPendencies as IReservation[]);
     
   };
   
@@ -48,30 +49,31 @@ export const Pendentes = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {pendencies?.map(resevation => (
-              <Tr key={resevation.id}>
-                <Td>
-                  <Heading size="md">{resevation.user.email}</Heading>
-                  <Text color="gray.500">{resevation.user.name}</Text>
-                </Td>
-                <Td>{resevation.book.title}</Td>
-                <Td>{new Date(resevation.createdAt).toLocaleDateString()}</Td>
-                <Td>{new Date(resevation.returnPreview).toLocaleDateString()}</Td>
-                <Td>
-                  {new Date(resevation.returnPreview).getTime() > new Date().getTime() ? (
-                    <Flex gap="10px">
-                      <Button onClick={() => sendPermition(resevation.book.id, "Reading")} colorScheme="green">Permitir</Button>
-                      <Button onClick={() => sendPermition(resevation.book.id, "Denied")} colorScheme="red">Negar</Button>
-                    </Flex>
-                    
-                  ) : (
-                    <Flex gap="10px">
-                      <Button onClick={() => sendPermition(resevation.book.id, "Finished")} colorScheme="green">Devolveu</Button>
-                    </Flex>
-                  ) }
-                </Td>
-              </Tr>
-            ))}
+            {pendencies?.map(resevation => {
+              const isLate = new Date(resevation.returnPreview).getTime() < new Date().getTime();
+              return (
+                <Tr key={resevation.id}>
+                  <Td>
+                    <Heading size="md">{resevation.user.email}</Heading>
+                    <Text color="gray.500">{resevation.user.name}</Text>
+                  </Td>
+                  <Td>{resevation.book.title}</Td>
+                  <Td>{new Date(resevation.createdAt).toLocaleDateString()}</Td>
+                  <Td>{new Date(resevation.returnPreview + ":").toLocaleDateString()}</Td>
+                  <Td>
+                    {resevation.status === "Reading" ||  isLate ? (
+                      <Flex gap="10px">
+                        <Button onClick={() => sendPermition(resevation.book.id, "Finished")} colorScheme={isLate ? "yellow" : "green"}>Devolveu</Button>
+                      </Flex>
+                    ) : (
+                      <Flex gap="10px">
+                        <Button onClick={() => sendPermition(resevation.book.id, "Reading")} colorScheme="green">Permitir</Button>
+                        <Button onClick={() => sendPermition(resevation.book.id, "Denied")} colorScheme="red">Negar</Button>
+                      </Flex>
+                    )}
+                  </Td>
+                </Tr>
+              );})}
           </Tbody>
           <Tfoot>
             <Tr>
