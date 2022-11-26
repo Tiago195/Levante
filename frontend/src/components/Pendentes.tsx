@@ -1,15 +1,15 @@
 import { Box, Button, Flex, Heading, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, useToast } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Context from "../context";
 import { IReservation } from "../interfaces/IReservation";
 import { reservationApi } from "../utils/api";
+import { onNewReservation } from "../utils/socket";
 
 export const Pendentes = () => {
   const { pendencies, setPendencies } = useContext(Context);
   const toast = useToast();
 
   const sendPermition = async (bookId: number,  status: string) => {
-    
     try {
       await reservationApi.patch(bookId, status);
       toast({
@@ -29,12 +29,16 @@ export const Pendentes = () => {
       });
     }
 
-    const newPendencies = status === "Reading" ? pendencies?.map(e => ({...e, status: "Reading"})) : pendencies!.filter(e => e.book.id !== bookId);
+    const newPendencies = status === "Reading"
+      ? pendencies?.map(e => ({...e, status: e.book.id === bookId ? "Reading" : e.status}))
+      : pendencies!.filter(e => e.book.id !== bookId);
 
     setPendencies(newPendencies as IReservation[]);
     
   };
   
+  useEffect(() => onNewReservation(setPendencies), []);
+
   return (
     <Box>
       <TableContainer>

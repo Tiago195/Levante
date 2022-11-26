@@ -3,6 +3,7 @@ import React, { useContext, useRef } from "react";
 import Context from "../context";
 import { IBook } from "../interfaces/IBook";
 import { booksApi, reservationApi } from "../utils/api";
+import { sendNotificationForAdm } from "../utils/socket";
 
 type Props = {
   book: IBook
@@ -37,6 +38,7 @@ export const ModalReservation = ({ book }: Props) => {
         // setBooks(data);
         // console.log(data);
         onClose();
+        sendNotificationForAdm();
       } catch (error: any) {
         const message = error.response.data.message;
         toast({
