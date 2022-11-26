@@ -25,7 +25,8 @@
     "joi-translation-pt-br": "^0.0.6",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.25.8"
+    "sequelize": "^6.25.8",
+    "socket.io": "^4.5.4"
   },
   "devDependencies": {
     "eslint": "^8.28.0",
