@@ -19,7 +19,7 @@ export const InputCategories = ({setCategories, categories }: Props) => {
     <>
       <FormLabel>Adicionar categoria</FormLabel>
 
-      <CheckboxGroup colorScheme='green' value={categories.map(e => JSON.stringify(e))} onChange={changeCategories}>
+      <CheckboxGroup colorScheme='green' value={categories.map(e => JSON.stringify({id: e.id, name: e.name }))} onChange={changeCategories}>
         <Stack display="flex" flexDirection="row" wrap="wrap" justifyContent="space-between">
           {AllCategories?.map(category => (
             <Tag key={category.id}>

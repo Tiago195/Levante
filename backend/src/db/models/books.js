@@ -21,7 +21,7 @@ module.exports = (Sequelize, DataTypes) => {
   }, {
     hooks: {
       afterFind: async (instance, options) => {
-        if (instance.length) {
+        if (instance && instance.length) {
           for (let i of instance) {
             const data = await i.getCategories();
             i.dataValues.categories = data;
