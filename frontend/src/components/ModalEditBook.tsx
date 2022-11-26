@@ -36,6 +36,12 @@ export const ModalEditBook = ({book}: Props) => {
       try {
         setLoading(true);
         await booksApi.update(updateBook, book.id);
+        toast({
+          title: "Pode levar um tempo, mas logo logo as mudanças aparecerão.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
       } catch (err: any) {
         const message = err.response.data.message;
         toast({
