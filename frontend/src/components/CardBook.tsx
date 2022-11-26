@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { Box, Button, Card, CardBody, CardFooter, Flex, Heading, HStack, Image, Stack, Tag, Text } from "@chakra-ui/react";
+import { Badge, Box, Button, Card, CardBody, CardFooter, Flex, Heading, HStack, Image, Stack, Tag, Text } from "@chakra-ui/react";
 import { IBook } from "../interfaces/IBook";
 import { ModalLogin } from "./ModalLogin";
 import Context from "../context";
 import ActionBookBtn from "./ActionBookBtn";
+import { GiRead } from "react-icons/gi";
 
 type Props = {
   book: IBook
@@ -29,6 +30,7 @@ export const CardBook = ({book}: Props) => {
       </Box>
       <Stack w="100%">
         <CardBody >
+          <Badge display="flex" w="fit-content" alignItems="center" fontSize="1xs" gap="0.5rem" colorScheme='twitter'><GiRead />{book.readCount}</Badge>
           <Heading size='md'>{book.title}</Heading>
 
           <Text py='2'>{book.author}</Text>

@@ -15,6 +15,10 @@ const infanto = [
     categoryId: 3
   },
   {
+    bookId: 3,
+    categoryId: 1
+  },
+  {
     bookId: 4,
     categoryId: 3
   },
@@ -51,6 +55,10 @@ const poesia = [
   {
     bookId: 11,
     categoryId: 5
+  },
+  {
+    bookId: 11,
+    categoryId: 1
   },
 ];
 

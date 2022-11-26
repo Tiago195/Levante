@@ -43,11 +43,11 @@ export const History = () => {
   useEffect(() => {getReservations();}, []);
 
   const colors = {
+    "": "",
     Pending: "yellow.500",
-    Finished: "red.500",
+    Finished: "blue.500",
     Reading: "green.500",
-    Denied: "req.1000",
-    "": ""
+    Denied: "red.500",
   };
 
   return (

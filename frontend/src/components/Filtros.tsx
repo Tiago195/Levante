@@ -9,7 +9,7 @@ export const Filtros = () => {
   const options = [
     {key: "Titulo", value: "title"},
     {value: "author", key: "Author"},
-    {value: "lido", key: "Mais lidos"}
+    {value: "readCount", key: "Mais lidos"}
   ];
 
   const changeOrder = ({ target }: ChangeEvent<HTMLSelectElement>) => {
