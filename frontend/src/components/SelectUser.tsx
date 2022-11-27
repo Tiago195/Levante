@@ -115,7 +115,9 @@ export const SelectUser = ({users, setUsers}: Props) => {
               </ListItem>
             ))}
           </List>
-          <Pagination incrementPage={incrementPage} decrementPage={decrementPage} limit={getReservations!.length} page={page}  />
+          {!!getReservations?.length && (
+            <Pagination incrementPage={incrementPage} decrementPage={decrementPage} limit={getReservations.length} page={page}  />
+          )}
         </Flex>
       )}
     </>
