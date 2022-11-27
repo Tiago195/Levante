@@ -36,18 +36,25 @@ Clone o projeto
 git clone git@github.com:Tiago195/Levante.git
 ```
 
+Entre na pasta com o comando
+```bash
+cd Levante
+```
+
+Altere o arquivo .env dentro da pasta backend ou utilize o arquivo que deixei como default
+
 Suba os containers necessarios com o comando
 ```docker
-docker run --name levante-DB -e MYSQL_ROOT_PASSWORD=tutu -p 3002:3306 -d mysql
+docker run --name levante-DB -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 -d mysql
 ```
 
 Rode o back end com o comando
 ```bash
-cd backend && npm start
+npm run start:back
 ```
 
 Rode o front end com o comando
 ```bash
-cd frontend && npm start
+npm run start:front
 ```
 
