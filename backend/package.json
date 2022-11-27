@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.js",
+    "prestart": "npm run db:reset",
     "start": "node src/server.js",
     "lint": "npx eslint src",
     "lint:fix": "npm run lint -- --fix",
