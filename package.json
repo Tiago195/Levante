@@ -1,0 +1,21 @@
+{
+  "name": "levante",
+  "version": "1.0.0",
+  "description": "Uma biblioteca de uma grande cidade está com dificuldades de organizar as reservas de seus livros, hoje todo o controle é feito manualmente, para saber os livros mais reservados levaria um tempo de pesquisa nos livros de reserva. Então a biblioteca teve uma ideia de montar um sistema de reservas, com o requisitos:",
+  "main": "index.js",
+  "scripts": {
+    "start:back": "cd backend && npm i && npm run db:reset && npm start",
+    "start:front": "cd frontend && npm i && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tiago195/Levante.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tiago195/Levante/issues"
+  },
+  "homepage": "https://github.com/Tiago195/Levante#readme"
+}
