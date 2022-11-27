@@ -67,7 +67,7 @@ export const Pendentes = () => {
                   <Td>
                     {resevation.status === 'Reading' ||  isLate ? (
                       <Flex gap="10px">
-                        <Button onClick={() => sendPermition(resevation.book.id, 'Finished')} colorScheme={isLate ? 'yellow' : 'green'}>Devolveu</Button>
+                        <Button onClick={() => sendPermition(resevation.book.id, 'Finished')} colorScheme={isLate ? 'yellow' : 'green'}>Devolver</Button>
                       </Flex>
                     ) : (
                       <Flex gap="10px">
