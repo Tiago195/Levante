@@ -4,10 +4,8 @@ const { Book, Category, Reservation } = require("../db/models");
 
 module.exports = {
   getAll: async ({ title = "", author = "", page = 0, order = "id", by = "ASC", category = "", status = "" }) => {
-
-    const isAvailable = status ? {
-      status: false
-    } : "";
+    console.log(status);
+    const isAvailable = status ? { status: 0 } : "";
 
     const books = await Book.findAll({
       where: {
