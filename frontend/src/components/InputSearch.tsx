@@ -1,6 +1,6 @@
-import { Box, Input, InputGroup, InputLeftAddon, Text } from "@chakra-ui/react";
-import React, {  useRef, useState } from "react";
-import { Loading } from "./Loading";
+import { Box, Input, InputGroup, InputLeftAddon, Text } from '@chakra-ui/react';
+import React, {  useRef, useState } from 'react';
+import { Loading } from './Loading';
 
 type Props = {
   list: string,

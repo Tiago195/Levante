@@ -1,7 +1,7 @@
-import { Box, Button, Checkbox, Divider, Flex, FormControl, FormLabel, Heading, Input, Stack } from "@chakra-ui/react";
-import React from "react";
-import { FormNewBook } from "./FormNewBook";
-import { FormNewUser } from "./FormNewUser";
+import { Divider, Flex, FormControl, Stack } from '@chakra-ui/react';
+import React from 'react';
+import { FormNewBook } from './FormNewBook';
+import { FormNewUser } from './FormNewUser';
 
 export const Cadastrar = () => {
 

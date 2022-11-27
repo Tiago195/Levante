@@ -1,16 +1,16 @@
-import { Box, Button, FormControl, FormLabel, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, useToast } from "@chakra-ui/react";
-import React, { useContext, useRef } from "react";
-import Context from "../context";
-import { IBook } from "../interfaces/IBook";
-import { booksApi, reservationApi } from "../utils/api";
-import { sendNotificationForAdm } from "../utils/socket";
+import { Box, Button, FormControl, FormLabel, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, useToast } from '@chakra-ui/react';
+import React, { useContext, useRef } from 'react';
+import Context from '../context';
+import { IBook } from '../interfaces/IBook';
+import { reservationApi } from '../utils/api';
+import { sendNotificationForAdm } from '../utils/socket';
 
 type Props = {
   book: IBook
 }
 
 export const ModalReservation = ({ book }: Props) => {
-  const { user, query, setBooks } = useContext(Context);
+  const { user } = useContext(Context);
   const toast = useToast();
   const previewDate = useRef<HTMLInputElement>(null);
 
@@ -29,8 +29,8 @@ export const ModalReservation = ({ book }: Props) => {
       try {
         await reservationApi.create(createReservation);
         toast({
-          title: "Pedido do Livro enviado, um adm vai cuidar disso para você.",
-          status: "success",
+          title: 'Pedido do Livro enviado, um adm vai cuidar disso para você.',
+          status: 'success',
           duration: 5000,
           isClosable: true,
         });
@@ -42,9 +42,9 @@ export const ModalReservation = ({ book }: Props) => {
       } catch (error: any) {
         const message = error.response.data.message;
         toast({
-          title: "Algo deu errado.",
+          title: 'Algo deu errado.',
           description: message,
-          status: "error",
+          status: 'error',
           duration: 5000,
           isClosable: true,
         });

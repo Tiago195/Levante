@@ -1,9 +1,9 @@
-import { Box, Button, Flex, Heading, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, useToast } from "@chakra-ui/react";
-import React, { useContext, useEffect } from "react";
-import Context from "../context";
-import { IReservation } from "../interfaces/IReservation";
-import { reservationApi } from "../utils/api";
-import { onNewReservation } from "../utils/socket";
+import { Box, Button, Flex, Heading, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, useToast } from '@chakra-ui/react';
+import React, { useContext, useEffect } from 'react';
+import Context from '../context';
+import { IReservation } from '../interfaces/IReservation';
+import { reservationApi } from '../utils/api';
+import { onNewReservation } from '../utils/socket';
 
 export const Pendentes = () => {
   const { pendencies, setPendencies } = useContext(Context);
@@ -13,24 +13,24 @@ export const Pendentes = () => {
     try {
       await reservationApi.patch(bookId, status);
       toast({
-        title: "Pendencia Resolvida.",
-        status: "success",
+        title: 'Pendencia Resolvida.',
+        status: 'success',
         duration: 5000,
         isClosable: true,
       });
     } catch (error: any) {
       const message = error.response.data.message;
       toast({
-        title: "Algo deu errado.",
+        title: 'Algo deu errado.',
         description: message,
-        status: "error",
+        status: 'error',
         duration: 5000,
         isClosable: true,
       });
     }
 
-    const newPendencies = status === "Reading"
-      ? pendencies?.map(e => ({...e, status: e.book.id === bookId ? "Reading" : e.status}))
+    const newPendencies = status === 'Reading'
+      ? pendencies?.map(e => ({...e, status: e.book.id === bookId ? 'Reading' : e.status}))
       : pendencies!.filter(e => e.book.id !== bookId);
 
     setPendencies(newPendencies as IReservation[]);
@@ -63,16 +63,16 @@ export const Pendentes = () => {
                   </Td>
                   <Td>{resevation.book.title}</Td>
                   <Td>{new Date(resevation.createdAt).toLocaleDateString()}</Td>
-                  <Td>{new Date(resevation.returnPreview + ":").toLocaleDateString()}</Td>
+                  <Td>{new Date(resevation.returnPreview + ':').toLocaleDateString()}</Td>
                   <Td>
-                    {resevation.status === "Reading" ||  isLate ? (
+                    {resevation.status === 'Reading' ||  isLate ? (
                       <Flex gap="10px">
-                        <Button onClick={() => sendPermition(resevation.book.id, "Finished")} colorScheme={isLate ? "yellow" : "green"}>Devolveu</Button>
+                        <Button onClick={() => sendPermition(resevation.book.id, 'Finished')} colorScheme={isLate ? 'yellow' : 'green'}>Devolveu</Button>
                       </Flex>
                     ) : (
                       <Flex gap="10px">
-                        <Button onClick={() => sendPermition(resevation.book.id, "Reading")} colorScheme="green">Permitir</Button>
-                        <Button onClick={() => sendPermition(resevation.book.id, "Denied")} colorScheme="red">Negar</Button>
+                        <Button onClick={() => sendPermition(resevation.book.id, 'Reading')} colorScheme="green">Permitir</Button>
+                        <Button onClick={() => sendPermition(resevation.book.id, 'Denied')} colorScheme="red">Negar</Button>
                       </Flex>
                     )}
                   </Td>

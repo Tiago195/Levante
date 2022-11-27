@@ -1,5 +1,5 @@
-import { ICategory } from "./ICategory";
-import { IReservation } from "./IReservation";
+import { ICategory } from './ICategory';
+import { IReservation } from './IReservation';
 
 export interface IBook {
   id: number,

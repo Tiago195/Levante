@@ -1,4 +1,4 @@
-import { IReservation } from "./IReservation";
+import { IReservation } from './IReservation';
 
 export interface ILogin {
   email: string,

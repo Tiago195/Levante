@@ -1,7 +1,7 @@
-import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from "@chakra-ui/react";
-import React, { useContext, useRef } from "react";
-import Context from "../context";
-import { userApi } from "../utils/api";
+import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from '@chakra-ui/react';
+import React, { useContext, useRef } from 'react';
+import Context from '../context';
+import { userApi } from '../utils/api';
 
 type Props = {
   colorScheme?: string,
@@ -11,7 +11,7 @@ type Props = {
 
 }
 
-export const ModalLogin = ({textBtn, disabled = false, variant = "solid", colorScheme = ""}: Props) => {
+export const ModalLogin = ({textBtn, disabled = false, variant = 'solid', colorScheme = ''}: Props) => {
   const {setUser } = useContext(Context);
   const emailInput = useRef<HTMLInputElement>(null);
   const passwordInput = useRef<HTMLInputElement>(null);
@@ -31,9 +31,9 @@ export const ModalLogin = ({textBtn, disabled = false, variant = "solid", colorS
       } catch (error: any) {
         const message = error.response.data.message;
         toast({
-          title: "Algo deu errado.",
+          title: 'Algo deu errado.',
           description: message,
-          status: "error",
+          status: 'error',
           duration: 5000,
           isClosable: true,
         });

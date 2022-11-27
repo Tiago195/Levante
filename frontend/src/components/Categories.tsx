@@ -1,22 +1,22 @@
-import { Box, Button, List, ListIcon, ListItem, Text } from "@chakra-ui/react";
-import React, { useContext } from "react";
-import { FaGamepad } from "react-icons/fa";
-import { RiUserSmileFill, RiAdminFill } from "react-icons/ri";
-import { MdChildFriendly, MdBook } from "react-icons/md";
-import { GiAlienStare } from "react-icons/gi";
-import Context from "../context";
-import { booksApi } from "../utils/api";
+import { Box, Button, List, ListIcon, ListItem, Text } from '@chakra-ui/react';
+import React, { useContext } from 'react';
+import { FaGamepad } from 'react-icons/fa';
+import { RiUserSmileFill, RiAdminFill } from 'react-icons/ri';
+import { MdChildFriendly, MdBook } from 'react-icons/md';
+import { GiAlienStare } from 'react-icons/gi';
+import Context from '../context';
+import { booksApi } from '../utils/api';
 
 export const Categories = () => {
   const { categories, query, setBooks } = useContext(Context);
 
   const categoriesIcons = {
     Humor: RiUserSmileFill,
-    "Infanto Juvenis": MdChildFriendly ,
+    'Infanto Juvenis': MdChildFriendly ,
     Jogos: FaGamepad,
     Poesia: MdBook,
-    "Ficção Científica": GiAlienStare,
-    "Escolha do editor": RiAdminFill 
+    'Ficção Científica': GiAlienStare,
+    'Escolha do editor': RiAdminFill 
   };
 
   const changeCategory = (name: string) => {
@@ -36,7 +36,7 @@ export const Categories = () => {
             </ListItem>
           </Button>
         ))}
-        <Button variant="outline" w="100%" onClick={() => changeCategory("")}>
+        <Button variant="outline" w="100%" onClick={() => changeCategory('')}>
           <ListItem  display="flex" alignItems="center" >
             <ListIcon />
             <Text>Todos({categories?.reduce((a, b) => a + b.qtdBooks, 0)})</Text>

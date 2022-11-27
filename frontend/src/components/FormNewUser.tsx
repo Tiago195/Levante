@@ -1,6 +1,6 @@
-import { Box, Button, Checkbox, FormLabel, Heading, Input, useToast } from "@chakra-ui/react";
-import React, { useRef } from "react";
-import { userApi } from "../utils/api";
+import { Box, Button, Checkbox, FormLabel, Heading, Input, useToast } from '@chakra-ui/react';
+import React, { useRef } from 'react';
+import { userApi } from '../utils/api';
 
 export const FormNewUser = () => {
   const nameInput = useRef<HTMLInputElement>(null);
@@ -21,23 +21,23 @@ export const FormNewUser = () => {
       try {
         await userApi.create(createUser);
         toast({
-          title: "Usuario Criado.",
-          status: "success",
+          title: 'Usuario Criado.',
+          status: 'success',
           duration: 5000,
           isClosable: true,
         });
         console.log(isAdminInput.current.checked);
         
-        nameInput.current.value = "";
-        emailInput.current.value = "";
-        passwordInput.current.value = "";
+        nameInput.current.value = '';
+        emailInput.current.value = '';
+        passwordInput.current.value = '';
         
       } catch (error: any) {
         const message = error.response.data.message;
         toast({
-          title: "Algo deu errado.",
+          title: 'Algo deu errado.',
           description: message,
-          status: "error",
+          status: 'error',
           duration: 5000,
           isClosable: true,
         });

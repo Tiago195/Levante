@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
-import { Box, Button, Divider, Flex, FormControl, FormLabel, Image, Input, List, ListIcon, ListItem, Select, Stack, Switch, Tag, Text } from "@chakra-ui/react";
-import { CardBook } from "../components/CardBook";
-import { Header } from "../components/Header";
-import {FaGamepad} from "react-icons/fa";
-import { Categories } from "../components/Categories";
-import { CarouselBook } from "../components/CarouselBook";
-import { Filtros } from "../components/Filtros";
-import Context from "../context";
-import { booksApi } from "../utils/api";
-import { Pagination } from "../components/Pagination";
+import React, { useContext } from 'react';
+import { Box, Divider, Flex, Stack } from '@chakra-ui/react';
+import { CardBook } from '../components/CardBook';
+import { Header } from '../components/Header';
+import { Categories } from '../components/Categories';
+import { CarouselBook } from '../components/CarouselBook';
+import { Filtros } from '../components/Filtros';
+import Context from '../context';
+import { booksApi } from '../utils/api';
+import { Pagination } from '../components/Pagination';
 
 export const Home = () => {
   const { books, query, setBooks } = useContext(Context);

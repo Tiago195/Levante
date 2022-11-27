@@ -1,10 +1,10 @@
-import { Alert, AlertIcon, Box, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
-import React, { LegacyRef, useState } from "react";
-import { IBook } from "../interfaces/IBook";
-import { IQueryGetAllBooks } from "../interfaces/IQueryGetAllBooks";
-import { booksApi } from "../utils/api";
-import { CardBook } from "./CardBook";
-import { InputSearch } from "./InputSearch";
+import { Alert, AlertIcon, Box, Flex, FormLabel, Input, Text } from '@chakra-ui/react';
+import React, { LegacyRef } from 'react';
+import { IBook } from '../interfaces/IBook';
+import { IQueryGetAllBooks } from '../interfaces/IQueryGetAllBooks';
+import { booksApi } from '../utils/api';
+import { CardBook } from './CardBook';
+import { InputSearch } from './InputSearch';
 
 type Props = {
   book: IBook[],
@@ -17,12 +17,12 @@ export const SelectBook = ({book, setBooks, input}: Props) => {
   const searchBooks = async (search: string) => {
     const query: IQueryGetAllBooks = {
       title: search,
-      author: "",
-      by: "",
-      category: "",
-      order: "",
+      author: '',
+      by: '',
+      category: '',
+      order: '',
       page: 0,
-      status: ""
+      status: false
     };
     await booksApi.getAll(query).then(({data}) => setBooks(data)); 
   };

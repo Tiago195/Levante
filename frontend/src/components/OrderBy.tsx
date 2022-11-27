@@ -1,7 +1,5 @@
-import { Button, Flex, Select } from "@chakra-ui/react";
-import React, { ChangeEvent, MutableRefObject } from "react";
-import { IQueryGetAllBooks } from "../interfaces/IQueryGetAllBooks";
-import { IQueryGetAllReservation } from "../interfaces/IQueryGetAllReservation";
+import {  Flex, Select } from '@chakra-ui/react';
+import React, { ChangeEvent } from 'react';
 
 type Props = {
   changeOrder: (event: ChangeEvent<HTMLSelectElement>) => void

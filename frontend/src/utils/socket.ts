@@ -1,14 +1,16 @@
-import io from "socket.io-client";
-import { reservationApi } from "./api";
+import { Dispatch, SetStateAction } from 'react';
+import io from 'socket.io-client';
+import { IReservation } from '../interfaces/IReservation';
+import { reservationApi } from './api';
 
-export const socket = io("http://localhost:3001");
+export const socket = io('http://localhost:3001');
 
 export const sendNotificationForAdm = () => {
-  socket.emit("requestReservation");
+  socket.emit('requestReservation');
 };
 
-export const onNewReservation = (setPendencies: any) => {
-  socket.on("newReservation", () => {
+export const onNewReservation = (setPendencies: Dispatch<SetStateAction<IReservation[]>>) => {
+  socket.on('newReservation', () => {
     reservationApi.getAllPendencies().then(({data}) => setPendencies(data));
   });
 };

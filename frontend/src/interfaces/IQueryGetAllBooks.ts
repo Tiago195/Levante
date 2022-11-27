@@ -5,5 +5,5 @@ export interface IQueryGetAllBooks {
   order: string,
   by: string,
   category: string,
-  status: "true" | "false" | ""
+  status: boolean
 }

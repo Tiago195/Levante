@@ -1,26 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
-import Context from ".";
-import { IBook } from "../interfaces/IBook";
-import { ICategory } from "../interfaces/ICategory";
-import { IQueryGetAllBooks } from "../interfaces/IQueryGetAllBooks";
-import { IReservation } from "../interfaces/IReservation";
-import { IUser } from "../interfaces/IUser";
-import { booksApi, categoryApi, reservationApi } from "../utils/api";
+import React, { useEffect, useRef, useState } from 'react';
+import Context from '.';
+import { IBook } from '../interfaces/IBook';
+import { ICategory } from '../interfaces/ICategory';
+import { IQueryGetAllBooks } from '../interfaces/IQueryGetAllBooks';
+import { IReservation } from '../interfaces/IReservation';
+import { IUser } from '../interfaces/IUser';
+import { booksApi, categoryApi, reservationApi } from '../utils/api';
 
-export const Provider = ({ children }: any) => {
+type Props = {
+  children: React.ReactNode
+}
+
+export const Provider: React.FC<Props> = ({ children }) => {
   const [books, setBooks] = useState<IBook[]>([]);
-  const [user, setUser] = useState<IUser>(JSON.parse(localStorage.getItem("user") as string) ?? {});
+  const [user, setUser] = useState<IUser>(JSON.parse(localStorage.getItem('user') as string) ?? {});
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [reservations, setReservations] = useState<IReservation[]>([]);
   const [pendencies, setPendencies] = useState<IReservation[]>([]);
   const query = useRef<IQueryGetAllBooks>({
-    title: "",
-    author: "",
+    title: '',
+    author: '',
     page: 0,
-    order: "id",
-    by: "",
-    category: "",
-    status: ""
+    order: 'id',
+    by: '',
+    category: '',
+    status: false
   });
 
   useEffect(() => {

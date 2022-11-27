@@ -1,22 +1,21 @@
-import { Box, Button, Flex, FormControl, FormLabel, Heading, InputRightElement, Input, InputGroup, InputLeftElement, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, Kbd } from "@chakra-ui/react";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import Context from "../context";
-import { IQueryGetAllReservation } from "../interfaces/IQueryGetAllReservation";
-import { IReservation } from "../interfaces/IReservation";
-import { reservationApi } from "../utils/api";
-import {AiOutlineSearch} from "react-icons/ai";
-import { DreawerFilter } from "./DreawerFilter";
-import { Pagination } from "./Pagination";
+import { Box, Flex, Heading, InputRightElement, Input, InputGroup, InputLeftElement, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, Kbd } from '@chakra-ui/react';
+import React, { useEffect, useRef, useState } from 'react';
+import { IQueryGetAllReservation } from '../interfaces/IQueryGetAllReservation';
+import { IReservation } from '../interfaces/IReservation';
+import { reservationApi } from '../utils/api';
+import {AiOutlineSearch} from 'react-icons/ai';
+import { DreawerFilter } from './DreawerFilter';
+import { Pagination } from './Pagination';
 
 export const History = () => {
   const query = useRef<IQueryGetAllReservation>({
-    title: "",
-    email: "",
-    by: "",
-    order: "id",
+    title: '',
+    email: '',
+    by: '',
+    order: 'id',
     page: 0,
-    status: "",
-    createdAt: ""
+    status: '',
+    createdAt: ''
   });
   const [reservations, setReservations] = useState<IReservation[]>([]);
 
@@ -37,17 +36,17 @@ export const History = () => {
   };
 
   const search = async ({key}: any) => {
-    if(key === "Enter") await getReservations();
+    if(key === 'Enter') await getReservations();
   };
 
   useEffect(() => {getReservations();}, []);
 
   const colors = {
-    "": "",
-    Pending: "yellow.500",
-    Finished: "blue.500",
-    Reading: "green.500",
-    Denied: "red.500",
+    '': '',
+    Pending: 'yellow.500',
+    Finished: 'blue.500',
+    Reading: 'green.500',
+    Denied: 'red.500',
   };
 
   return (

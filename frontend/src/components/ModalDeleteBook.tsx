@@ -1,9 +1,9 @@
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, Progress, useDisclosure } from "@chakra-ui/react";
-import React, { RefObject, useContext, useRef, useState } from "react";
-import Context from "../context";
-import { IBook } from "../interfaces/IBook";
-import { booksApi, categoryApi } from "../utils/api";
-import { Loading } from "./Loading";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure } from '@chakra-ui/react';
+import React, { RefObject, useContext, useRef, useState } from 'react';
+import Context from '../context';
+import { IBook } from '../interfaces/IBook';
+import { booksApi, categoryApi } from '../utils/api';
+import { Loading } from './Loading';
 
 type Props = {
   book: IBook

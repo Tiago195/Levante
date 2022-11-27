@@ -1,16 +1,15 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   ChakraProvider,
   theme,
-} from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+} from '@chakra-ui/react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { ColorModeSwitcher } from "./ColorModeSwitcher";
-import { Home } from "./pages/Home";
-import { Provider } from "./context/Provider";
-import { Profile } from "./pages/Profile";
+import { Home } from './pages/Home';
+import { Provider } from './context/Provider';
+import { Profile } from './pages/Profile';
 // import { Logo } from "./Logo"
-import "./app.css";
+import './app.css';
 
 export const App = () => (
   <ChakraProvider theme={theme}>

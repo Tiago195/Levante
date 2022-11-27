@@ -1,12 +1,10 @@
-import { Box, Button, Checkbox, CheckboxGroup, FormControl, FormLabel, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Tag, TagCloseButton, TagLabel, TagRightIcon, Textarea, useDisclosure, useToast } from "@chakra-ui/react";
-import React, { useContext, useRef, useState } from "react";
-import { IBook } from "../interfaces/IBook";
-import {GrAdd} from "react-icons/gr";
-import Context from "../context";
-import { ICategory } from "../interfaces/ICategory";
-import { booksApi } from "../utils/api";
-import { Loading } from "./Loading";
-import { InputCategories } from "./InputCategories";
+import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Textarea, useDisclosure, useToast } from '@chakra-ui/react';
+import React, { useContext, useRef, useState } from 'react';
+import { IBook } from '../interfaces/IBook';
+import Context from '../context';
+import { booksApi } from '../utils/api';
+import { Loading } from './Loading';
+import { InputCategories } from './InputCategories';
 
 type Props = {
   book: IBook
@@ -37,17 +35,17 @@ export const ModalEditBook = ({book}: Props) => {
         setLoading(true);
         await booksApi.update(updateBook, book.id);
         toast({
-          title: "Pode levar um tempo, mas logo logo as mudanças aparecerão.",
-          status: "success",
+          title: 'Pode levar um tempo, mas logo logo as mudanças aparecerão.',
+          status: 'success',
           duration: 5000,
           isClosable: true,
         });
       } catch (err: any) {
         const message = err.response.data.message;
         toast({
-          title: "Algo deu errado.",
+          title: 'Algo deu errado.',
           description: message,
-          status: "error",
+          status: 'error',
           duration: 5000,
           isClosable: true,
         });
@@ -88,7 +86,7 @@ export const ModalEditBook = ({book}: Props) => {
           </ModalBody>
   
           <ModalFooter>
-            <Button variant='ghost' colorScheme={"red"}  mr={3} onClick={onClose}>
+            <Button variant='ghost' colorScheme={'red'}  mr={3} onClick={onClose}>
                 Close
             </Button>
             <Button onClick={send} colorScheme='green'>Salvar</Button>

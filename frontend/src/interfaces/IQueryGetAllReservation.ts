@@ -1,4 +1,4 @@
-import { statusReservation } from "./IReservation";
+import { statusReservation } from './IReservation';
 
 export interface IQueryGetAllReservation {
   page: number,

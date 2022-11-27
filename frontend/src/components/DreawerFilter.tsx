@@ -1,10 +1,10 @@
-import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, FormControl, FormLabel, Input, Select, Text, useDisclosure } from "@chakra-ui/react";
-import React, { ChangeEvent, MutableRefObject, useContext, useState } from "react";
-import { FaEllipsisV } from "react-icons/fa";
-import Context from "../context";
-import { IQueryGetAllReservation } from "../interfaces/IQueryGetAllReservation";
-import { statusReservation } from "../interfaces/IReservation";
-import { OrderBy } from "./OrderBy";
+import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, FormControl, FormLabel, Input, Select, useDisclosure } from '@chakra-ui/react';
+import React, { ChangeEvent, MutableRefObject, useContext } from 'react';
+import { FaEllipsisV } from 'react-icons/fa';
+import Context from '../context';
+import { IQueryGetAllReservation } from '../interfaces/IQueryGetAllReservation';
+import { statusReservation } from '../interfaces/IReservation';
+import { OrderBy } from './OrderBy';
 
 type Props = {
   query: MutableRefObject<IQueryGetAllReservation>,
@@ -15,9 +15,9 @@ export const DreawerFilter = ({query, get}: Props) => {
   const { user } = useContext(Context);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const options = [
-    {value: "returnDate", key: "Data de retorno"},
-    {value: "returnPreview", key: "Previsão de entrega"},
-    {value: "createdAt", key: "Data da reserva"},
+    {value: 'returnDate', key: 'Data de retorno'},
+    {value: 'returnPreview', key: 'Previsão de entrega'},
+    {value: 'createdAt', key: 'Data da reserva'},
   ];
   const btnRef = React.useRef(null);
 

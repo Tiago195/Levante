@@ -1,4 +1,4 @@
-export type statusReservation = "Pending" | "Finished" | "Reading" | "Denied" | ""
+export type statusReservation = 'Pending' | 'Finished' | 'Reading' | 'Denied' | ''
 
 export interface IReservation {
   id: number,

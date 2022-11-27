@@ -1,8 +1,8 @@
-import { Box, Button, FormLabel, Heading, Input, useToast } from "@chakra-ui/react";
-import React, { useRef, useState } from "react";
-import { ICategory } from "../interfaces/ICategory";
-import { booksApi } from "../utils/api";
-import { InputCategories } from "./InputCategories";
+import { Box, Button, FormLabel, Heading, Input, useToast } from '@chakra-ui/react';
+import React, { useRef, useState } from 'react';
+import { ICategory } from '../interfaces/ICategory';
+import { booksApi } from '../utils/api';
+import { InputCategories } from './InputCategories';
 
 export const FormNewBook = () => {
   const titleInput = useRef<HTMLInputElement>(null);
@@ -25,21 +25,21 @@ export const FormNewBook = () => {
       try {
         await booksApi.create(createdBook);
         toast({
-          title: "Livro Criado.",
-          status: "success",
+          title: 'Livro Criado.',
+          status: 'success',
           duration: 5000,
           isClosable: true,
         });
-        titleInput.current.value = "";
-        authorInput.current.value = "";
-        capaInput.current.value = "";
+        titleInput.current.value = '';
+        authorInput.current.value = '';
+        capaInput.current.value = '';
         setCategories([]);
       } catch (error: any) {
         const message = error.response.data.message;
         toast({
-          title: "Algo deu errado.",
+          title: 'Algo deu errado.',
           description: message,
-          status: "error",
+          status: 'error',
           duration: 5000,
           isClosable: true,
         });

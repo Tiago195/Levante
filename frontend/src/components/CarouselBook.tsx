@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { Badge, Box, Flex, Heading, HStack, Image, Tag, Text } from "@chakra-ui/react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { GiRead } from "react-icons/gi";
+import React, { useEffect, useState } from 'react';
+import { Badge, Box, Flex, Heading, HStack, Tag, Text } from '@chakra-ui/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { GiRead } from 'react-icons/gi';
 
-import { Pagination } from "swiper";
+import { Pagination } from 'swiper';
 
-import "swiper/css";
-import "swiper/css/pagination";
-import { IBook } from "../interfaces/IBook";
-import { booksApi } from "../utils/api";
-import { IQueryGetAllBooks } from "../interfaces/IQueryGetAllBooks";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { IBook } from '../interfaces/IBook';
+import { booksApi } from '../utils/api';
+import { IQueryGetAllBooks } from '../interfaces/IQueryGetAllBooks';
 
 export const CarouselBook =  () => {
   const [books, setBooks] = useState<IBook[]>();
 
   useEffect(() => {
     (() => {
-      booksApi.getAll({category: "Escolha do editor"} as IQueryGetAllBooks).then(({data}) => setBooks(data));
+      booksApi.getAll({category: 'Escolha do editor'} as IQueryGetAllBooks).then(({data}) => setBooks(data));
     })();
   },[]);
 
@@ -27,12 +27,12 @@ export const CarouselBook =  () => {
       slidesPerView={1}
       pagination={{ clickable: true }}
       onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
+      onSlideChange={() => console.log('slide change')}
       allowSlideNext={true}
       allowSlidePrev={true}
     >
       {books?.map(book => (
-        <SwiperSlide key={book.id} style={{display: "flex" }}>
+        <SwiperSlide key={book.id} style={{display: 'flex' }}>
           <Flex gap="20px" >
             <Box
               backgroundImage={book.cover}
@@ -40,7 +40,7 @@ export const CarouselBook =  () => {
               backgroundPosition="center"
               w="200px"
               h="300px"
-              filter={book.status ? "grayscale(1)" : "grayscale(0)"}
+              filter={book.status ? 'grayscale(1)' : 'grayscale(0)'}
             ></Box>
             <Flex flexDirection="column" justifyContent="space-between" maxW="70%">
               <Box>

@@ -1,9 +1,9 @@
-import { Button, Flex } from "@chakra-ui/react";
-import React from "react";
-import { IBook } from "../interfaces/IBook";
-import { ModalDeleteBook } from "./ModalDeleteBook";
-import { ModalEditBook } from "./ModalEditBook";
-import { ModalReservation } from "./ModalReservation";
+import {  Flex } from '@chakra-ui/react';
+import React from 'react';
+import { IBook } from '../interfaces/IBook';
+import { ModalDeleteBook } from './ModalDeleteBook';
+import { ModalEditBook } from './ModalEditBook';
+import { ModalReservation } from './ModalReservation';
 
 type Props = {
   isAdmin: boolean,

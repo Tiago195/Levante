@@ -1,5 +1,5 @@
-import { Progress } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Progress } from '@chakra-ui/react';
+import React from 'react';
 
 type Props = {
   loading: boolean

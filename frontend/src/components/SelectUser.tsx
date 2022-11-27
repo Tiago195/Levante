@@ -1,11 +1,11 @@
-import { Alert, AlertIcon, Badge, Box, Checkbox, Flex, Heading, List, ListIcon, ListItem, Stack, Text } from "@chakra-ui/react";
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { IUser } from "../interfaces/IUser";
-import { userApi } from "../utils/api";
-import { InputSearch } from "./InputSearch";
-import {BsCalendarFill} from "react-icons/bs";
-import { IReservation, statusReservation } from "../interfaces/IReservation";
-import { Pagination } from "./Pagination";
+import { Badge, Box, Checkbox, Flex, Heading, List, ListIcon, ListItem, Stack, Text } from '@chakra-ui/react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { IUser } from '../interfaces/IUser';
+import { userApi } from '../utils/api';
+import { InputSearch } from './InputSearch';
+import {BsCalendarFill} from 'react-icons/bs';
+import { IReservation } from '../interfaces/IReservation';
+import { Pagination } from './Pagination';
 
 type Props = {
   users: IUser[],
@@ -18,14 +18,14 @@ export const SelectUser = ({users, setUsers}: Props) => {
   };
 
   const colors = {
-    "": "",
-    Pending: "yellow.500",
-    Finished: "blue.500",
-    Reading: "green.500",
-    Denied: "red.500",
+    '': '',
+    Pending: 'yellow.500',
+    Finished: 'blue.500',
+    Reading: 'green.500',
+    Denied: 'red.500',
   };
 
-  const [status, setStatus] = useState<string[]>(["Reading"]);
+  const [status, setStatus] = useState<string[]>(['Reading']);
   const [reservations, setResevations] = useState<IReservation[] | undefined>(users[0]?.reservations);
   const [page, setPage] = useState(0);
   const [getReservations, setGetReservations] = useState(reservations?.filter(e => status.includes(e.status)).slice(page * 10, 10));
@@ -111,7 +111,7 @@ export const SelectUser = ({users, setUsers}: Props) => {
             {getReservations?.map(e => (
               <ListItem p="0 10px" key={e.id}>
                 <ListIcon as={BsCalendarFill} color={colors[e.status]} />
-                {new Date(e.returnPreview).toLocaleDateString("pt-BR", {weekday: "long", year: "numeric", month: "long", day: "numeric"})}
+                {new Date(e.returnPreview).toLocaleDateString('pt-BR', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})}
               </ListItem>
             ))}
           </List>

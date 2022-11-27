@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { Badge, Box, Button, Card, CardBody, CardFooter, Flex, Heading, HStack, Image, Stack, Tag, Text } from "@chakra-ui/react";
-import { IBook } from "../interfaces/IBook";
-import { ModalLogin } from "./ModalLogin";
-import Context from "../context";
-import ActionBookBtn from "./ActionBookBtn";
-import { GiRead } from "react-icons/gi";
+import React, { useContext } from 'react';
+import { Badge, Box, Card, CardBody, CardFooter, Heading, HStack, Stack, Tag, Text } from '@chakra-ui/react';
+import { IBook } from '../interfaces/IBook';
+import { ModalLogin } from './ModalLogin';
+import Context from '../context';
+import ActionBookBtn from './ActionBookBtn';
+import { GiRead } from 'react-icons/gi';
 
 type Props = {
   book: IBook
@@ -15,7 +15,7 @@ export const CardBook = ({book}: Props) => {
   
   return (
     <Card
-      direction={{ base: "column", sm: "row" }}
+      direction={{ base: 'column', sm: 'row' }}
       overflow='hidden'
       variant='outline'
     >
@@ -24,7 +24,7 @@ export const CardBook = ({book}: Props) => {
         backgroundSize="cover"
         backgroundPosition="center"
         w="200px"
-        filter={book.status ? "grayscale(1)" : "grayscale(0)"}
+        filter={book.status ? 'grayscale(1)' : 'grayscale(0)'}
       >
 
       </Box>

@@ -1,15 +1,15 @@
-import { Button, Flex, FormControl, FormLabel, Select, Switch } from "@chakra-ui/react";
-import React, { ChangeEvent, useContext } from "react";
-import Context from "../context";
-import { booksApi } from "../utils/api";
-import { OrderBy } from "./OrderBy";
+import { Button, Flex, FormControl, FormLabel, Switch } from '@chakra-ui/react';
+import React, { ChangeEvent, useContext } from 'react';
+import Context from '../context';
+import { booksApi } from '../utils/api';
+import { OrderBy } from './OrderBy';
 
 export const Filtros = () => {
   const { query, setBooks } = useContext(Context);
   const options = [
-    {key: "Titulo", value: "title"},
-    {value: "author", key: "Author"},
-    {value: "readCount", key: "Mais lidos"}
+    {key: 'Titulo', value: 'title'},
+    {value: 'author', key: 'Author'},
+    {value: 'readCount', key: 'Mais lidos'}
   ];
 
   const changeOrder = ({ target }: ChangeEvent<HTMLSelectElement>) => {
@@ -25,7 +25,7 @@ export const Filtros = () => {
   };
 
   const changeAvailable = async ({target}: ChangeEvent<HTMLInputElement>) => {
-    query!.current.status = target.checked ? "true" : "";
+    query!.current.status = target.checked;
     await changeBooks();
   };
 
