@@ -2,7 +2,7 @@
 
 Uma biblioteca de uma grande cidade está com dificuldades de organizar as reservas de seus livros,
 hoje todo o controle é feito manualmente, para saber os livros mais reservados levaria um tempo de pesquisa nos livros de reserva.
-Então a biblioteca teve uma ideia de montar um sistema de reservas, com o requisitos:
+Então a biblioteca teve uma ideia de montar um sistema de reservas.
 
 ## Funcionalidades
 ### As principais funcionalides desta aplicação são:
